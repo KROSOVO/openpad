@@ -430,6 +430,74 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
 .set-card input[type=range]{background:rgba(120,120,128,.28)}
 .set-card input[type=range]::-webkit-slider-thumb{background:#0a84ff}
 
+/* ============ VESC : compteur ============ */
+.vesc-app{background:radial-gradient(120% 110% at 50% 0%,#151a24 0%,#0a0c11 55%,#06070a 100%)}
+.v-head{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:33px 20px 6px}
+.v-title h1{font-size:21px;font-weight:700;letter-spacing:-.4px;margin:0;line-height:1.05}
+.v-sub{display:block;font-size:10px;color:rgba(255,255,255,.42);letter-spacing:.6px;margin-top:2px}
+.v-status{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:10px;font-weight:700;letter-spacing:1.2px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:5px 10px;white-space:nowrap}
+.v-status i{width:6px;height:6px;border-radius:50%;background:#7c828e;flex:0 0 auto}
+.v-status.on{color:#fff}
+.v-status.on i{background:#34c759;box-shadow:0 0 8px #34c759}
+.v-status.demo i{background:#ffb020;box-shadow:0 0 8px #ffb020}
+.v-actions{display:flex;gap:6px}
+.v-btn{border:0;border-radius:9px;height:30px;padding:0 12px;font:700 11px var(--font);letter-spacing:.4px;background:#0a84ff;color:#fff;cursor:pointer;transition:filter .15s,transform .1s}
+.v-btn:hover{filter:brightness(1.12)}
+.v-btn:active{transform:scale(.95)}
+.v-btn.alt{background:rgba(255,255,255,.11);color:#fff}
+.v-body{flex:1;min-height:0;display:flex;gap:14px;padding:2px 20px 12px}
+.v-gauge{position:relative;width:296px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.v-arc{width:100%;height:auto;overflow:visible;display:block}
+.v-arc-bg{fill:none;stroke:rgba(255,255,255,.09);stroke-width:13;stroke-linecap:round}
+.v-arc-fg{fill:none;stroke:#0a84ff;stroke-width:13;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .15s linear,stroke .2s;filter:drop-shadow(0 0 9px rgba(10,132,255,.5))}
+.v-arc-fg.regen{stroke:#34c759;filter:drop-shadow(0 0 9px rgba(52,199,89,.45))}
+.v-speed{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding-top:8px}
+.v-speed span{font-size:92px;font-weight:600;line-height:.9;letter-spacing:-5px;font-variant-numeric:tabular-nums}
+.v-speed small{font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.5);margin-top:6px}
+.v-src{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:9px;letter-spacing:2.2px;color:rgba(255,255,255,.38);white-space:nowrap}
+.v-mode-pill{position:absolute;left:50%;top:6px;transform:translateX(-50%);background:#0a84ff;color:#fff;font:700 10.5px var(--font);letter-spacing:1.6px;border-radius:999px;padding:5px 13px;cursor:pointer;border:0;box-shadow:0 4px 14px rgba(10,132,255,.35)}
+.v-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;justify-content:center}
+.v-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.v-tile{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:8px 10px;min-width:0}
+.v-tile>span{display:block;font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.42);white-space:nowrap}
+.v-tile b{display:block;font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.15;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.v-tile b small{font-size:9px;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:0;margin-left:2px}
+.v-bar{height:4px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:5px}
+.v-bar i{display:block;height:100%;width:0;background:#0a84ff;border-radius:3px;transition:width .3s}
+.v-bar.low i{background:#ff3b30}
+.v-modes{display:flex;gap:6px}
+.v-modes button{flex:1;height:32px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);font:700 10.5px var(--font);letter-spacing:1.1px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-modes button.on{background:#0a84ff;border-color:#0a84ff;color:#fff;box-shadow:0 4px 14px rgba(10,132,255,.35)}
+.v-foot{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:rgba(255,255,255,.42);letter-spacing:.3px}
+.v-foot b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* HUD de ride sur la carte */
+.ride-hud{position:absolute;left:16px;top:44px;z-index:6;background:rgba(12,16,24,.74);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:9px 12px;min-width:152px;color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.rh-speed{display:flex;align-items:baseline;gap:5px}
+.rh-speed b{font-size:30px;font-weight:600;letter-spacing:-1.6px;line-height:1}
+.rh-speed small{font-size:9px;letter-spacing:1.6px;color:rgba(255,255,255,.5)}
+.rh-items{display:flex;gap:9px;margin-top:5px;font-size:9.5px;color:rgba(255,255,255,.55);white-space:nowrap}
+.rh-items b{color:#fff;font-weight:600}
+.rh-trip{margin-top:3px;font-size:9.5px;color:rgba(255,255,255,.45)}
+.rh-trip b{color:#fff;font-weight:600}
+
+/* Bilan de ride */
+.ride-body{padding:2px 20px 14px;gap:14px;min-height:0}
+.ride-col{flex:1;min-width:0;display:flex;min-height:0}
+.ride-card{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:11px 13px;display:flex;flex-direction:column;min-height:0}
+.ride-h{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:4px}
+.ride-rows{flex:1;overflow-y:auto;min-height:0;display:flex;flex-direction:column}
+.ride-row{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:10.5px;color:rgba(255,255,255,.5)}
+.ride-row:last-child{border-bottom:0}
+.ride-row b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.ride-reset{margin-left:auto}
+
+/* Paramètres VESC */
+.num-in{width:50px;height:24px;border-radius:6px;border:1px solid rgba(60,60,67,.16);background:#f7f7fa;padding:0 4px;font:600 10.5px var(--font);color:#111;text-align:center;outline:none;flex:0 0 auto}
+.num-in+.num-in{margin-left:4px}
+.num-in::-webkit-outer-spin-button,.num-in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.mode-label{font-size:9px;color:#8a8a8e;letter-spacing:.4px;text-align:center;margin:0 0 2px}
+
 .seg.compact{flex:0 0 auto;margin:0;padding:2px;gap:2px;background:rgba(120,120,128,.14);border-radius:8px}
 .seg.compact button{flex:0 0 auto;padding:4px 10px;font-size:10.5px;border-radius:6px;color:#6a6a70;background:transparent}
 .seg.compact button.on{background:#fff;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.14)}
@@ -523,9 +591,14 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
       <!-- ============ PLANS ============ -->
       <section class="app" data-app="maps" data-sb="dark" id="app-maps">
         <div id="map"></div>
+        <div class="ride-hud" id="rideHud">
+          <div class="rh-speed"><b id="gSpeed">0</b><small>KM/H</small></div>
+          <div class="rh-items"><span>Batt <b id="gSoc">--</b>%</span><span><b id="gKw">--</b> kW</span></div>
+          <div class="rh-trip"><span id="gMode">ECO</span> · Trajet <b id="gTrip">0.0</b> km</div>
+        </div>
         <div class="map-search">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8a8e" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
-          <input id="mapQ" placeholder="Rechercher un lieu, une adresse…" autocomplete="off" />
+          <input id="mapQ" placeholder="Destination, adresse…" autocomplete="off" />
           <button id="mapClear" class="map-clear" aria-label="Effacer">×</button>
         </div>
         <div class="map-results" id="mapResults"></div>
@@ -660,21 +733,47 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
         </div>
       </section>
 
-      <!-- ============ COMPTEUR MOTO ============ -->
-      <section class="app app-dark" data-app="speedo" data-sb="light" id="app-speedo">
-        <div class="soon">
-          <div class="soon-art" id="soonSpeedo"></div>
-          <h2>Compteur moto</h2>
-          <p>Application en préparation.<br>Disponible dans une prochaine version.</p>
+      <!-- ============ COMPTEUR VESC ============ -->
+      <section class="app vesc-app" data-app="speedo" data-sb="light" id="app-speedo">
+        <header class="v-head">
+          <div class="v-title"><h1>Compteur</h1><span class="v-sub">VESC · télémétrie</span></div>
+          <div class="v-status" id="vStatus"><i></i><span>DÉCONNECTÉ</span></div>
+          <div class="v-actions">
+            <button class="v-btn alt" id="vDemo">Démo</button>
+            <button class="v-btn" id="vConnect">Connecter</button>
+          </div>
+        </header>
+        <div class="v-body">
+          <div class="v-gauge">
+            <svg class="v-arc" viewBox="0 0 300 210" aria-hidden="true">
+              <path class="v-arc-bg" d="M 30 175 A 120 120 0 1 1 270 175"/>
+              <path class="v-arc-fg" id="vArc" d="M 30 175 A 120 120 0 1 1 270 175" pathLength="100"/>
+            </svg>
+            <div class="v-speed"><span id="vSpeed">0</span><small>KM/H</small></div>
+            <div class="v-src" id="vSrc">SOURCE · GPS</div>
+            <button class="v-mode-pill" id="vModePill">ECO</button>
+          </div>
+          <div class="v-side">
+            <div class="v-tiles">
+              <div class="v-tile"><span>Batterie</span><b><span id="vSoc">--</span><small>%</small></b><div class="v-bar" id="vSocBar"><i></i></div></div>
+              <div class="v-tile"><span>Puissance</span><b><span id="vKw">--</span><small>kW</small></b></div>
+              <div class="v-tile"><span>Tension</span><b><span id="vVolts">--</span><small>V</small></b></div>
+              <div class="v-tile"><span>Moteur</span><b><span id="vTempM">--</span><small>°C</small></b></div>
+              <div class="v-tile"><span>Contrôleur</span><b><span id="vTempC">--</span><small>°C</small></b></div>
+              <div class="v-tile"><span>Courant</span><b><span id="vAmp">--</span><small>A</small></b></div>
+            </div>
+            <div class="v-modes" id="vModes"></div>
+            <div class="v-foot"><span>Trajet <b id="vTrip">0.0</b> km</span><span>Max <b id="vMax">0</b> km/h</span><span>Duty <b id="vDuty">--</b> %</span></div>
+          </div>
         </div>
       </section>
 
       <!-- ============ BILAN DE RIDE ============ -->
       <section class="app app-dark" data-app="ride" data-sb="light" id="app-ride">
-        <div class="soon">
-          <div class="soon-art" id="soonRide"></div>
-          <h2>Bilan de ride</h2>
-          <p>Vos trajets et statistiques<br>apparaîtront ici.</p>
+        <header class="apphead"><h1>Bilan de ride</h1><span class="head-sub">Session en cours</span><button class="pillbtn ride-reset" id="rideReset">Réinitialiser</button></header>
+        <div class="appbody ride-body">
+          <div class="ride-col"><div class="ride-card"><div class="ride-h">Trajet</div><div class="ride-rows" id="rideRows"></div></div></div>
+          <div class="ride-col"><div class="ride-card"><div class="ride-h">Depuis le démarrage</div><div class="ride-rows" id="rideSince"></div></div></div>
         </div>
       </section>
 
@@ -770,6 +869,21 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
               </div>
             </div>
             <div class="set-group">
+              <div class="set-label">VESC</div>
+              <div class="set-card">
+                <div class="set-row"><div><div class="set-name">Roue</div><div class="set-desc">Diamètre pneu (pouces)</div></div><input class="num-in" id="vehWheel" type="number" min="6" max="30" step="0.5" value="10" aria-label="Taille de roue"></div>
+                <div class="set-row"><div><div class="set-name">Moteur</div><div class="set-desc">Pôles · réduction</div></div><input class="num-in" id="vehPoles" type="number" min="2" max="60" step="2" value="30" aria-label="Pôles moteur"><input class="num-in" id="vehGear" type="number" min="0.1" max="30" step="0.1" value="1" aria-label="Réduction"></div>
+                <div class="set-row"><div><div class="set-name">Batterie</div><div class="set-desc">S · min · max (V/cellule)</div></div><input class="num-in" id="vehCells" type="number" min="3" max="30" step="1" value="14" aria-label="Cellules"><input class="num-in" id="vehCellMin" type="number" min="2" max="4" step="0.05" value="2.8" aria-label="Tension mini"><input class="num-in" id="vehCellMax" type="number" min="3" max="4.5" step="0.05" value="4.2" aria-label="Tension maxi"></div>
+                <div class="set-row"><div><div class="set-name">Vitesse</div><div class="set-desc">Source</div></div><div class="seg compact" id="vehSrc"><button type="button" data-src="auto">AUTO</button><button type="button" data-src="vesc">VESC</button><button type="button" data-src="gps">GPS</button></div></div>
+                <div class="set-row"><div><div class="set-name">Carte</div><div class="set-desc">Fond</div></div><div class="seg compact" id="vehMap"><button type="button" data-mt="auto">AUTO</button><button type="button" data-mt="sat">SAT</button><button type="button" data-mt="plan">PLAN</button></div></div>
+                <div class="set-row"><div><div class="set-name">Limite VESC</div><div class="set-desc">Courant moteur max (A)</div></div><input class="num-in" id="vehMaxA" type="number" min="5" max="300" step="1" value="50" aria-label="Courant moteur max VESC"></div>
+              </div>
+            </div>
+            <div class="set-group">
+              <div class="set-label">Modes de conduite</div>
+              <div class="set-card" id="vehModes"></div>
+            </div>
+            <div class="set-group">
               <div class="set-label">Données</div>
               <div class="set-card">
                 <div class="set-row set-row-btn" id="clearData"><div><div class="set-name">Effacer les données</div><div class="set-desc">Messages, événements, réglages</div></div></div>
@@ -778,7 +892,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
             <div class="set-group">
               <div class="set-label">À propos</div>
               <div class="set-card">
-                <div class="set-row"><div><div class="set-name">OpenPad OS 1.1</div><div class="set-desc">HTML · CSS · JS · Leaflet · OpenStreetMap</div></div></div>
+                <div class="set-row"><div><div class="set-name">OpenPad OS 1.2</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
                 <div class="set-row"><div><div class="set-name">made by KROSOVO</div><div class="set-desc">Design &amp; développement</div></div></div>
               </div>
             </div>
@@ -1216,6 +1330,287 @@ const Narrator = {
 };
 try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => {}; } catch(e){}
 
+/* ==================== MOTEUR VESC ==================== */
+const VESC = {
+  cfg: Object.assign({ wheelIn:10, poles:30, gear:1, cells:14, cellMin:2.8, cellMax:4.2, src:'auto', map:'auto', maxA:50 }, store.get('vescCfg', {})),
+  modes: (() => {
+    const m = store.get('vescModes', null);
+    const ok = Array.isArray(m) && m.length >= 1 && m.every(x => x && typeof x.name === 'string' && isFinite(x.motor) && isFinite(x.batt) && isFinite(x.kmh));
+    return ok ? m : [
+      { name:'ECO', motor:20, batt:10, kmh:25 },
+      { name:'SPORT', motor:40, batt:20, kmh:45 },
+      { name:'RACE', motor:50, batt:40, kmh:0 }
+    ];
+  })(),
+  mode: 0,
+  live:false, demo:false, connecting:false,
+  device:null, tx:null, rx:null, buffer:[], poll:null, demoTimer:null,
+  speedBle:0, gpsKmh:null, pos:null, trail:[], watchId:null,
+  trip:0, maxKmh:0, lastTick:0, since:null,
+  state:{ speed:0, volts:null, bc:null, mc:null, duty:null, rpm:null, tempC:null, tempM:null, kw:null, soc:null },
+  stats:{ t:0, dist:0, wh:0, ah:0, vmax:0, pmax:0, imax:0, tfS:0, tfMax:-99, tmS:0, tmT:0, tmMax:-99 },
+  listeners:new Set(),
+
+  save(){ store.set('vescCfg', this.cfg); store.set('vescModes', this.modes); },
+
+  resetTrip(){
+    this.trip = 0; this.maxKmh = 0; this.lastTick = performance.now();
+    this.stats = { t:0, dist:0, wh:0, ah:0, vmax:0, pmax:0, imax:0, tfS:0, tfMax:-99, tmS:0, tmT:0, tmMax:-99 };
+    this.emit();
+  },
+
+  srcNow(){
+    return (this.cfg.src === 'gps' || (this.cfg.src === 'auto' && !this.live && !this.demo)) ? 'GPS' : 'VESC';
+  },
+  speedKmh(){ return this.srcNow() === 'GPS' ? (this.gpsKmh || 0) : this.speedBle; },
+
+  tick(){
+    const now = performance.now();
+    let dt = this.lastTick ? (now - this.lastTick) / 1000 : 0;
+    this.lastTick = now;
+    dt = Math.min(dt, 1.5);
+    if(dt <= 0) return;
+    const k = this.speedKmh(), s = this.stats, st = this.state;
+    this.trip += k * dt / 3600;
+    s.t += dt; s.dist += k * dt / 3600;
+    s.vmax = Math.max(s.vmax, k);
+    if(st.volts != null && st.bc != null){
+      const p = st.volts * st.bc;
+      s.wh += p * dt / 3600; s.ah += st.bc * dt / 3600;
+      s.pmax = Math.max(s.pmax, p); s.imax = Math.max(s.imax, st.bc);
+    }
+    if(st.tempC != null){ s.tfS += st.tempC * dt; s.tfMax = Math.max(s.tfMax, st.tempC); }
+    if(st.tempM != null){ s.tmS += st.tempM * dt; s.tmT += dt; s.tmMax = Math.max(s.tmMax, st.tempM); }
+    this.maxKmh = Math.max(this.maxKmh, k);
+  },
+
+  update(){ this.tick(); this.state.speed = this.speedKmh(); this.emit(); },
+  emit(){ this.listeners.forEach(fn => fn(this)); },
+
+  onData(o){
+    const st = this.state, cfg = this.cfg;
+    st.tempC = +o.temp; st.tempM = o.tm > -50 ? +o.tm : null;
+    st.mc = o.mc; st.bc = o.bc; st.duty = o.duty; st.rpm = o.rpm; st.volts = o.volts;
+    st.kw = o.volts * o.bc / 1000;
+    this.speedBle = Math.abs(o.rpm) / (cfg.poles / 2) / cfg.gear * Math.PI * (cfg.wheelIn * 0.0254) * 60 / 1000;
+    const vMin = cfg.cells * cfg.cellMin, vMax = Math.max(vMin + 1, cfg.cells * cfg.cellMax);
+    st.soc = Math.max(0, Math.min(100, (o.volts - vMin) / (vMax - vMin) * 100));
+    if(o.ahD !== undefined) this.since = { ahD:o.ahD, ahC:o.ahC, whD:o.whD, whC:o.whC, distM:o.distM, distAbsM:o.distAbsM };
+    this.update();
+  },
+
+  kmhToErpm(k){ return k * 1000 / 60 / (Math.PI * this.cfg.wheelIn * 0.0254) * (this.cfg.poles / 2) * this.cfg.gear; },
+
+  startGps(){
+    if(this.watchId !== null || !navigator.geolocation) return;
+    this.watchId = navigator.geolocation.watchPosition(p => {
+      const c = p.coords;
+      this.pos = [c.latitude, c.longitude];
+      let g = c.speed != null ? Math.max(0, c.speed * 3.6) : this.gpsKmh;
+      if(c.speed != null && (g < 2 || (c.accuracy > 30 && g < 5))) g = 0;
+      this.gpsKmh = (g == null) ? null : g;
+      const last = this.trail[this.trail.length - 1];
+      if(!last || Math.abs(last[0] - c.latitude) + Math.abs(last[1] - c.longitude) > 0.00001){
+        this.trail.push([c.latitude, c.longitude]);
+        if(this.trail.length > 3000) this.trail.shift();
+      }
+      this.update();
+    }, () => { this.gpsKmh = null; this.emit(); }, { enableHighAccuracy:true, maximumAge:1000, timeout:15000 });
+  },
+
+  /* --- Protocole VESC --- */
+  crc16(data){
+    let crc = 0;
+    for(const b of data){ crc ^= b << 8; for(let i = 0; i < 8; i++) crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1); crc &= 0xffff; }
+    return crc;
+  },
+  sendFrame(p){
+    const c = this.crc16(p);
+    const pk = new Uint8Array([2, p.length, ...p, (c >> 8) & 255, c & 255, 3]);
+    if(!this.tx) return Promise.resolve();
+    let chain = Promise.resolve();
+    for(let i = 0; i < pk.length; i += 20){
+      const ch = pk.slice(i, i + 20);
+      chain = chain.then(() => this.tx.writeValueWithoutResponse ? this.tx.writeValueWithoutResponse(ch) : this.tx.writeValue(ch));
+    }
+    return chain.catch(()=>{});
+  },
+  sendCommand(c){ return this.sendFrame([c]); },
+
+  applyMode(){
+    if(!this.live || !this.tx) return;
+    const m = this.modes[this.mode];
+    const want = Math.max(0.02, Math.min(1, m.motor / Math.max(5, this.cfg.maxA)));
+    let eMax = 100000, wantE = null;
+    if(m.kmh > 0){ const e = Math.max(500, this.kmhToErpm(m.kmh)); if(e < eMax){ eMax = e; wantE = e; } }
+    const f32 = x => { const b = new DataView(new ArrayBuffer(4)); b.setFloat32(0, x); return Array.from(new Uint8Array(b.buffer)); };
+    const v = [1, want, -eMax, eMax, .005, .95, -1500000, 1500000];
+    this.sendFrame([48, 0, 0, 1, 0, ...v.flatMap(f32)]);
+  },
+
+  handlePayload(d){
+    const u16 = (a, o) => (a[o] << 8) | a[o + 1];
+    const s16 = (a, o) => { const n = u16(a, o); return n > 32767 ? n - 65536 : n; };
+    const s32 = (a, o) => { const n = a[o] * 16777216 + (a[o + 1] << 16) + (a[o + 2] << 8) + a[o + 3]; return n > 2147483647 ? n - 4294967296 : n; };
+    if(d[0] === 48){ this.emit(); return; }
+    if(d.length < 29 || d[0] !== 4) return;
+    const o = { temp:s16(d,1) / 10, tm:s16(d,3) / 10, mc:s32(d,5) / 100, bc:s32(d,9) / 100, duty:s16(d,21) / 10, rpm:s32(d,23), volts:u16(d,27) / 10 };
+    if(d.length >= 53){
+      const k = Math.PI * (this.cfg.wheelIn * 0.0254) / ((this.cfg.poles / 2) * 6 * this.cfg.gear);
+      Object.assign(o, { ahD:s32(d,29) / 1e4, ahC:s32(d,33) / 1e4, whD:s32(d,37) / 1e4, whC:s32(d,41) / 1e4, distM:s32(d,45) * k, distAbsM:s32(d,49) * k });
+    }
+    this.onData(o);
+  },
+
+  processBuffer(){
+    while(this.buffer.length >= 2){
+      const i = this.buffer.findIndex(x => x === 2 || x === 3);
+      if(i < 0){ this.buffer = []; return; }
+      if(i > 0) this.buffer.splice(0, i);
+      if(this.buffer[0] === 2){
+        const len = this.buffer[1], total = len + 5;
+        if(this.buffer.length < total) return;
+        const f = this.buffer.slice(0, total), p = f.slice(2, 2 + len), crc = (f[2 + len] << 8) | f[3 + len];
+        if(f[total - 1] === 3 && this.crc16(p) === crc) this.handlePayload(p);
+        this.buffer.splice(0, total);
+      } else {
+        if(this.buffer.length < 3) return;
+        const len = (this.buffer[1] << 8) | this.buffer[2], total = len + 6;
+        if(this.buffer.length < total) return;
+        const f = this.buffer.slice(0, total), p = f.slice(3, 3 + len), crc = (f[3 + len] << 8) | f[4 + len];
+        if(f[total - 1] === 3 && this.crc16(p) === crc) this.handlePayload(p);
+        this.buffer.splice(0, total);
+      }
+    }
+  },
+
+  notification(e){
+    const v = e.target.value;
+    for(const b of new Uint8Array(v.buffer, v.byteOffset, v.byteLength)) this.buffer.push(b);
+    if(this.buffer.length > 4096) this.buffer = this.buffer.slice(-1024);
+    this.processBuffer();
+  },
+
+  async connect(){
+    if(this.live) return this.disconnect();
+    if(!navigator.bluetooth){ alert('Bluetooth BLE non disponible dans ce navigateur. Utilise Chrome/Edge en HTTPS (ou la Démo).'); return; }
+    this.stopDemo();
+    this.connecting = true; this.emit();
+    const SVC = '6e400001-b5a3-f393-e0a9-e50e24dcca9e', RX = '6e400002-b5a3-f393-e0a9-e50e24dcca9e', TX = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+    const ALT_SVC = '0000ffe0-0000-1000-8000-00805f9b34fb', ALT_CHR = '0000ffe1-0000-1000-8000-00805f9b34fb';
+    let step = 'recherche';
+    try{
+      let dev;
+      try{
+        dev = await navigator.bluetooth.requestDevice({ filters:[{ services:[SVC] }], optionalServices:[ALT_SVC] });
+      }catch(e0){
+        if(!(e0 && e0.name === 'NotFoundError')) throw e0;
+        step = 'recherche (tous appareils)';
+        dev = await navigator.bluetooth.requestDevice({ acceptAllDevices:true, optionalServices:[SVC, ALT_SVC] });
+      }
+      this.device = dev;
+      dev.addEventListener('gattserverdisconnected', () => this.disconnected());
+      step = 'connexion';
+      const server = await dev.gatt.connect();
+      step = 'service';
+      let service, tx, rx;
+      try{
+        service = await server.getPrimaryService(SVC);
+        tx = await service.getCharacteristic(RX);
+        rx = await service.getCharacteristic(TX);
+      }catch(e1){
+        service = await server.getPrimaryService(ALT_SVC);
+        tx = rx = await service.getCharacteristic(ALT_CHR);
+      }
+      this.tx = tx; this.rx = rx;
+      step = 'notifications';
+      await rx.startNotifications();
+      rx.addEventListener('characteristicvaluechanged', e => this.notification(e));
+      this.buffer = []; this.live = true; this.connecting = false;
+      this.lastTick = performance.now();
+      try{ if(navigator.wakeLock) this._wl = await navigator.wakeLock.request('screen'); }catch(e){}
+      this.emit();
+      step = 'envoi';
+      this.applyMode();
+      await this.sendCommand(4);
+      clearInterval(this.poll);
+      this.poll = setInterval(() => this.sendCommand(4).catch(()=>{}), 250);
+    }catch(e){
+      console.error(e);
+      this.live = false; this.connecting = false; clearInterval(this.poll); this.poll = null;
+      try{ if(this.device && this.device.gatt && this.device.gatt.connected) this.device.gatt.disconnect(); }catch(x){}
+      const msg = (e && (e.message || e.name) || String(e)).toString().slice(0, 100);
+      alert('Connexion VESC impossible (' + step + ') : ' + msg);
+      this.emit();
+    }
+  },
+
+  disconnect(){
+    clearInterval(this.poll); this.poll = null;
+    this.tx = this.rx = null; this.buffer = [];
+    if(this.device && this.device.gatt && this.device.gatt.connected) this.device.gatt.disconnect();
+    this.disconnected();
+  },
+
+  disconnected(){
+    clearInterval(this.poll); this.poll = null;
+    this.tx = this.rx = null; this.buffer = []; this.live = false; this.connecting = false;
+    this.speedBle = 0;
+    this.state = { speed:this.speedKmh(), volts:null, bc:null, mc:null, duty:null, rpm:null, tempC:null, tempM:null, kw:null, soc:null };
+    try{ if(this._wl) this._wl.release(); }catch(e){}
+    this._wl = null;
+    this.emit();
+  },
+
+  toggleDemo(){
+    if(this.demo){ this.stopDemo(); return; }
+    if(this.live) return;
+    this.resetTrip();
+    this.demo = true; this.lastTick = performance.now();
+    let tt = 0, v = 0, thS = 0;
+    const dm = { ahD:0, ahC:0, whD:0, whC:0, d:0 };
+    const step = () => {
+      const m = this.modes[this.mode], dt = .1;
+      tt += dt;
+      let u = tt % 15, thT = 0;
+      for(const [d, g] of [[5,1],[3,.55],[3,1],[2.5,0],[1.5,0]]){ if(u < d){ thT = g; break; } u -= d; }
+      thS += (thT - thS) * .3;
+      const vmax = m.kmh > 0 ? m.kmh * .99 : Math.min(60, 25 + m.motor * .7);
+      const target = thS * vmax, accMax = 4 + m.motor * .25, brake = 12;
+      const dv = clamp((target - v) * 3, -brake, accMax) * dt, a = dv / dt;
+      v = Math.max(0, v + dv);
+      const mc = a >= 0 ? m.motor * clamp(a / accMax * .9 + .12 * v / vmax, 0, 1) : -m.motor * .25 * clamp(-a / brake, 0, 1);
+      const bc = Math.min(mc * (.3 + .5 * v / Math.max(vmax, 1)), m.batt);
+      const load = Math.abs(mc) / Math.max(1, m.motor);
+      const volts = this.cfg.cells * (3.9 - Math.max(bc, 0) * .004);
+      const rpm = this.kmhToErpm(v);
+      dm.ahD += Math.max(bc,0) * dt / 3600; dm.ahC += Math.max(-bc,0) * dt / 3600;
+      dm.whD += Math.max(volts*bc,0) * dt / 3600; dm.whC += Math.max(-volts*bc,0) * dt / 3600;
+      dm.d += v / 3.6 * dt;
+      this.onData({ temp:38 + load*22, tm:30 + load*28, mc, bc, duty:clamp(v / (m.kmh > 0 ? m.kmh * 1.25 : 72) * 100, 0, 95), rpm, volts,
+        ahD:dm.ahD, ahC:dm.ahC, whD:dm.whD, whC:dm.whC, distM:dm.d, distAbsM:dm.d });
+    };
+    step();
+    this.demoTimer = setInterval(step, 100);
+    this.emit();
+  },
+
+  stopDemo(){
+    if(!this.demoTimer) return;
+    clearInterval(this.demoTimer); this.demoTimer = null;
+    this.demo = false; this.speedBle = 0;
+    this.state = { speed:this.speedKmh(), volts:null, bc:null, mc:null, duty:null, rpm:null, tempC:null, tempM:null, kw:null, soc:null };
+    this.emit();
+  },
+
+  setMode(i){
+    this.mode = ((i | 0) + this.modes.length) % this.modes.length;
+    this.save();
+    if(this.live) this.applyMode();
+    this.emit();
+  }
+};
+
 /* ---------- Format ---------- */
 function fmt(sec){
   sec = Math.max(0, Math.round(sec || 0));
@@ -1616,23 +2011,14 @@ function renderMusic(p){
   hooks.messages = () => { renderList(); renderChat(); };
 })();
 
-/* ==================== PLANS / OPENSTREETMAP ==================== */
-(function initMaps(){
-  let map = null, ready = false, searchMarker = null, routeLine = null;
-  let userMarker = null, userPos = null, currentDest = null;
+/* ==================== PLANS / CARTE VESC ==================== */
+(function initRideMap(){
+  let map = null, ready = false, trailLine = null, meMarker = null, searchMarker = null, routeLine = null, tiles = null;
+  let follow = true, currentDest = null, toastTimer = null;
   const PARIS = [48.8566, 2.3522];
-  const POIS = [
-    { n:'Tour Eiffel', d:'Champ de Mars · 7e arr.', lat:48.85837, lon:2.294481 },
-    { n:'Musée du Louvre', d:'Rue de Rivoli · 1er arr.', lat:48.860611, lon:2.337644 },
-    { n:'Notre-Dame de Paris', d:'Île de la Cité · 4e arr.', lat:48.852968, lon:2.349902 },
-    { n:'Sacré-Cœur', d:'Montmartre · 18e arr.', lat:48.886705, lon:2.343104 },
-    { n:'Arc de Triomphe', d:'Place Charles-de-Gaulle', lat:48.873792, lon:2.295028 }
-  ];
-
-  const resultsEl = $('#mapResults');
-  const sheetEl = $('#mapSheet');
-  const toastEl = $('#mapToast');
-  let toastTimer = null;
+  const TILE_OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const TILE_SAT = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  const resultsEl = $('#mapResults'), sheetEl = $('#mapSheet'), toastEl = $('#mapToast');
 
   function toast(msg){
     toastEl.textContent = msg;
@@ -1641,14 +2027,51 @@ function renderMusic(p){
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
   }
 
-  function pin(color){
-    return L.divIcon({
-      className:'',
-      iconSize:[28,36],
-      iconAnchor:[14,35],
-      html:'<svg class="map-pin" width="28" height="36" viewBox="0 0 28 36"><path d="M14 1C7 1 1.5 6.6 1.5 13.6 1.5 23 14 35 14 35s12.5-12 12.5-21.4C26.5 6.6 21 1 14 1z" fill="' + color + '" stroke="#fff" stroke-width="2.4"/><circle cx="14" cy="13.5" r="4.6" fill="#fff"/></svg>'
-    });
+  function tileUrl(){ return VESC.cfg.map === 'sat' ? TILE_SAT : TILE_OSM; }
+
+  function setMe(ll){
+    if(!map) return;
+    if(!meMarker){
+      meMarker = L.marker(ll, {
+        icon: L.divIcon({ className:'', iconSize:[34,34], iconAnchor:[17,17], interactive:false, zIndexOffset:1000,
+          html:'<svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 2l8 19-8-5-8 5z" style="fill:#0a84ff" stroke="#fff" stroke-width="1.5"/></svg>' }),
+        interactive:false, zIndexOffset:1000
+      }).addTo(map);
+    } else meMarker.setLatLng(ll);
   }
+
+  function renderHud(v){
+    $('#gSpeed').textContent = Math.round(v.state.speed || 0);
+    $('#gSoc').textContent = v.state.soc != null ? Math.round(v.state.soc) : '--';
+    $('#gKw').textContent = v.state.kw != null ? v.state.kw.toFixed(1) : '--';
+    $('#gMode').textContent = v.modes[v.mode].name;
+    $('#gTrip').textContent = v.trip.toFixed(1);
+  }
+
+  function initMap(){
+    if(ready) return;
+    if(typeof L === 'undefined'){
+      toast('Carte indisponible : Leaflet non chargé');
+      return;
+    }
+    map = L.map('map', { zoomControl:false, attributionControl:true }).setView(VESC.pos || PARIS, VESC.pos ? 16 : 13);
+    tiles = L.tileLayer(tileUrl(), { maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>' }).addTo(map);
+    trailLine = L.polyline(VESC.trail, { color:'#0a84ff', weight:5, opacity:.9, lineCap:'round' }).addTo(map);
+    if(VESC.pos) setMe(VESC.pos);
+    map.on('dragstart', () => { follow = false; });
+    ready = true;
+    setTimeout(() => map.invalidateSize(), 90);
+  }
+
+  VESC.listeners.add(v => {
+    renderHud(v);
+    if(!ready || !v.pos) return;
+    setMe(v.pos);
+    if(v.trail.length) trailLine.setLatLngs(v.trail);
+    if(follow) map.panTo(v.pos, { animate:true, duration:.4 });
+  });
+
+  window.__rideTiles = () => { if(tiles) tiles.setUrl(tileUrl()); };
 
   function showPlace(name, sub, lat, lon){
     currentDest = { name, sub, lat:+lat, lon:+lon };
@@ -1664,34 +2087,7 @@ function renderMusic(p){
     sheetEl.classList.add('show');
   }
 
-  function hideSheet(){
-    sheetEl.classList.remove('show');
-    currentDest = null;
-  }
-
-  function initMap(){
-    if(ready) return;
-    if(typeof L === 'undefined'){
-      sheetEl.innerHTML = '<div class="ms-title">Carte indisponible</div><div class="ms-sub">Leaflet n\'a pas pu être chargé. Vérifiez votre connexion Internet puis rechargez la page.</div>';
-      sheetEl.classList.add('show');
-      return;
-    }
-    map = L.map('map', { zoomControl:false, attributionControl:true }).setView(PARIS, 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
-    }).addTo(map);
-
-    POIS.forEach(p => {
-      L.marker([p.lat, p.lon], { icon: pin('#ff3b30') })
-        .addTo(map)
-        .on('click', () => showPlace(p.n, p.d, p.lat, p.lon));
-    });
-
-    map.on('click', () => resultsEl.classList.remove('show'));
-    ready = true;
-    setTimeout(() => map.invalidateSize(), 90);
-  }
+  function hideSheet(){ sheetEl.classList.remove('show'); currentDest = null; }
 
   async function doSearch(q){
     q = q.trim();
@@ -1710,10 +2106,7 @@ function renderMusic(p){
       resultsEl.innerHTML = data.map((d, i) => `
         <div class="map-result" data-i="${i}">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="#0a84ff" style="flex:0 0 auto;margin-top:1px"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-          <div style="min-width:0">
-            <b>${esc(d.name || d.display_name.split(',')[0])}</b>
-            <span>${esc(d.display_name)}</span>
-          </div>
+          <div style="min-width:0"><b>${esc(d.name || d.display_name.split(',')[0])}</b><span>${esc(d.display_name)}</span></div>
         </div>`).join('');
     }catch(err){
       resultsEl.innerHTML = '<div class="map-result"><span>Recherche indisponible (connexion requise).</span></div>';
@@ -1722,14 +2115,16 @@ function renderMusic(p){
 
   resultsEl.addEventListener('click', e => {
     const item = e.target.closest('.map-result[data-i]');
-    if(!item) return;
+    if(!item || !map) return;
     const d = resultsEl._data[+item.dataset.i];
     if(!d) return;
     resultsEl.classList.remove('show');
     const lat = +d.lat, lon = +d.lon;
     if(searchMarker) map.removeLayer(searchMarker);
-    searchMarker = L.marker([lat, lon], { icon: pin('#0a84ff') }).addTo(map);
-    map.flyTo([lat, lon], 16, { duration: 1.1 });
+    searchMarker = L.marker([lat, lon], { icon: L.divIcon({ className:'', iconSize:[28,36], iconAnchor:[14,35],
+      html:'<svg width="28" height="36" viewBox="0 0 28 36"><path d="M14 1C7 1 1.5 6.6 1.5 13.6 1.5 23 14 35 14 35s12.5-12 12.5-21.4C26.5 6.6 21 1 14 1z" fill="#0a84ff" stroke="#fff" stroke-width="2.4"/><circle cx="14" cy="13.5" r="4.6" fill="#fff"/></svg>' }) }).addTo(map);
+    follow = false;
+    map.flyTo([lat, lon], 16, { duration:1 });
     showPlace(d.name || d.display_name.split(',')[0], d.display_name, lat, lon);
   });
 
@@ -1744,36 +2139,27 @@ function renderMusic(p){
   $('#mapZoomOut').addEventListener('click', () => map && map.zoomOut());
 
   $('#mapLocate').addEventListener('click', () => {
-    if(!navigator.geolocation) return toast('Géolocalisation non disponible');
-    toast('Localisation…');
-    navigator.geolocation.getCurrentPosition(pos => {
-      const lat = pos.coords.latitude, lon = pos.coords.longitude;
-      userPos = [lat, lon];
-      if(userMarker) map.removeLayer(userMarker);
-      userMarker = L.marker([lat, lon], { icon: pin('#0a84ff') }).addTo(map);
-      map.flyTo([lat, lon], 15, { duration: 1 });
-      toast('Position trouvée');
-    }, () => toast('Position refusée ou indisponible'), { enableHighAccuracy:true, timeout:8000 });
+    VESC.startGps();
+    if(VESC.pos && map){
+      follow = true;
+      map.flyTo(VESC.pos, Math.max(map.getZoom(), 15), { duration:.8 });
+    } else toast('Recherche de position GPS…');
   });
 
   async function routeTo(dest){
     if(!dest || !map) return;
-    let from = userPos || PARIS;
-    if(!userPos && map.distance(from, [dest.lat, dest.lon]) < 600) from = [48.8809, 2.3553];
-    const meta = $('#msMeta');
-    if(meta) meta.innerHTML = '<div class="ms-meta"><span>Calcul de l\'itinéraire…</span></div>';
+    const from = VESC.pos || [map.getCenter().lat, map.getCenter().lng];
+    if($('#msMeta')) $('#msMeta').innerHTML = '<div class="ms-meta"><span>Calcul de l\'itinéraire…</span></div>';
     try{
       const url = 'https://router.project-osrm.org/route/v1/driving/' + from[1] + ',' + from[0] + ';' + dest.lon + ',' + dest.lat + '?overview=full&geometries=geojson';
       const r = await fetch(url);
       const d = await r.json();
       if(!d.routes || !d.routes.length) throw new Error('no route');
       const route = d.routes[0];
-      const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
       if(routeLine) map.removeLayer(routeLine);
-      routeLine = L.polyline(coords, { color:'#0a84ff', weight:6, opacity:.9, lineCap:'round' }).addTo(map);
+      routeLine = L.polyline(route.geometry.coordinates.map(c => [c[1], c[0]]), { color:'#0a84ff', weight:6, opacity:.9, lineCap:'round' }).addTo(map);
       map.fitBounds(routeLine.getBounds(), { padding:[50, 90] });
-      const km = (route.distance / 1000).toFixed(1);
-      const min = Math.round(route.duration / 60);
+      const km = (route.distance / 1000).toFixed(1), min = Math.round(route.duration / 60);
       if($('#msMeta')) $('#msMeta').innerHTML = '<div class="ms-meta"><span>' + km + ' km</span><span>' + min + ' min</span><span style="color:#8a8a8e;font-weight:500">en voiture</span></div>';
     }catch(err){
       if($('#msMeta')) $('#msMeta').innerHTML = '<div class="ms-meta"><span style="color:#c44">Itinéraire indisponible (réseau).</span></div>';
@@ -1783,15 +2169,21 @@ function renderMusic(p){
   sheetEl.addEventListener('click', e => {
     const b = e.target.closest('[data-act]');
     if(!b) return;
-    const act = b.dataset.act;
-    if(act === 'close') hideSheet();
-    if(act === 'center' && currentDest && map) map.flyTo([currentDest.lat, currentDest.lon], 16, { duration:.9 });
-    if(act === 'route') routeTo(currentDest);
+    if(b.dataset.act === 'close') hideSheet();
+    if(b.dataset.act === 'center' && currentDest && map) map.flyTo([currentDest.lat, currentDest.lon], 16, { duration:.8 });
+    if(b.dataset.act === 'route') routeTo(currentDest);
   });
 
   hooks.maps = () => {
-    if(!ready){ initMap(); }
-    else setTimeout(() => map && map.invalidateSize(), 60);
+    initMap();
+    VESC.startGps();
+    renderHud(VESC);
+    if(!ready) return;
+    setTimeout(() => {
+      map.invalidateSize();
+      if(VESC.pos){ map.setView(VESC.pos, Math.max(map.getZoom(), 15)); follow = true; }
+    }, 80);
+    VESC.emit();
   };
 })();
 
@@ -2012,9 +2404,178 @@ function renderMusic(p){
   render();
 })();
 
-/* ==================== COMPTEUR / BILAN ==================== */
-$('#soonSpeedo').innerHTML = ICONS.speedo;
-$('#soonRide').innerHTML = ICONS.ride;
+/* ==================== COMPTEUR VESC ==================== */
+(function initVescUI(){
+  const modesEl = $('#vModes');
+
+  function renderChips(){
+    modesEl.innerHTML = VESC.modes.map((m, i) => `<button type="button" data-mode="${i}" class="${i === VESC.mode ? 'on' : ''}">${esc(m.name)}</button>`).join('');
+  }
+  renderChips();
+
+  modesEl.addEventListener('click', e => {
+    const b = e.target.closest('[data-mode]');
+    if(b){ VESC.setMode(+b.dataset.mode); renderChips(); }
+  });
+  $('#vModePill').addEventListener('click', () => { VESC.setMode(VESC.mode + 1); renderChips(); });
+  $('#vConnect').addEventListener('click', () => VESC.connect());
+  $('#vDemo').addEventListener('click', () => VESC.toggleDemo());
+
+  function paint(v){
+    const st = v.state;
+    $('#vSpeed').textContent = Math.round(st.speed || 0);
+    const lim = v.modes[v.mode] && v.modes[v.mode].kmh > 0 ? v.modes[v.mode].kmh * 1.15 : 70;
+    $('#vArc').style.strokeDashoffset = (100 - Math.min(1, (st.speed || 0) / lim) * 100).toFixed(1);
+    $('#vArc').classList.toggle('regen', st.bc != null && st.bc < -0.5);
+    $('#vSoc').textContent = st.soc != null ? Math.round(st.soc) : '--';
+    const bar = $('#vSocBar');
+    bar.classList.toggle('low', st.soc != null && st.soc < 20);
+    bar.querySelector('i').style.width = (st.soc != null ? st.soc : 0) + '%';
+    $('#vKw').textContent = st.kw != null ? st.kw.toFixed(1) : '--';
+    $('#vVolts').textContent = st.volts != null ? st.volts.toFixed(1) : '--';
+    $('#vTempM').textContent = st.tempM != null ? Math.round(st.tempM) : '--';
+    $('#vTempC').textContent = st.tempC != null ? Math.round(st.tempC) : '--';
+    $('#vAmp').textContent = st.bc != null ? st.bc.toFixed(1) : '--';
+    $('#vDuty').textContent = st.duty != null ? Math.round(st.duty) : '--';
+    $('#vTrip').textContent = v.trip.toFixed(1);
+    $('#vMax').textContent = Math.round(v.maxKmh);
+    $('#vSrc').textContent = 'SOURCE · ' + v.srcNow();
+    $('#vModePill').textContent = v.modes[v.mode] ? v.modes[v.mode].name : '—';
+    const status = $('#vStatus');
+    status.classList.toggle('on', v.live);
+    status.classList.toggle('demo', v.demo);
+    status.querySelector('span').textContent = v.live ? 'CONNECTÉ' : v.demo ? 'DÉMO' : v.connecting ? 'CONNEXION…' : 'DÉCONNECTÉ';
+    $('#vConnect').textContent = v.live ? 'Déconnecter' : 'Connecter';
+    $('#vDemo').textContent = v.demo ? 'Stop' : 'Démo';
+    $$('#vModes button').forEach((b, i) => {
+      if(v.modes[i]) b.textContent = v.modes[i].name;
+      b.classList.toggle('on', i === v.mode);
+    });
+  }
+
+  VESC.listeners.add(v => {
+    const app = document.querySelector('#app-speedo');
+    if(app && app.classList.contains('open')) paint(v);
+  });
+
+  hooks.speedo = () => { renderChips(); paint(VESC); VESC.emit(); };
+  renderChips();
+  paint(VESC);
+})();
+
+/* ==================== BILAN DE RIDE ==================== */
+(function initRideReport(){
+  const fmtT = s => {
+    s = Math.floor(s || 0);
+    return [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map(x => String(x).padStart(2, '0')).join(':');
+  };
+  const TRIP = [
+    ['Durée', v => fmtT(v.stats.t)],
+    ['Distance', v => v.stats.dist.toFixed(2) + ' km'],
+    ['Vitesse moyenne', v => v.stats.t > 0 ? (v.stats.dist / (v.stats.t / 3600)).toFixed(1) + ' km/h' : '--'],
+    ['Vitesse max', v => v.stats.vmax.toFixed(1) + ' km/h'],
+    ['Énergie', v => v.stats.wh.toFixed(1) + ' Wh'],
+    ['Efficacité', v => v.stats.dist > 0.02 ? (v.stats.wh / v.stats.dist).toFixed(1) + ' Wh/km' : '--'],
+    ['Puissance max', v => v.stats.pmax ? Math.round(v.stats.pmax) + ' W' : '--'],
+    ['Courant max', v => v.stats.imax ? v.stats.imax.toFixed(1) + ' A' : '--'],
+    ['Temp. moteur max', v => v.stats.tmMax > -50 ? Math.round(v.stats.tmMax) + ' °C' : '--'],
+    ['Temp. contrôleur max', v => v.stats.tfMax > -50 ? Math.round(v.stats.tfMax) + ' °C' : '--']
+  ];
+  const SINCE = [
+    ['Ah consommés', v => v.since ? (v.since.ahD * 1000).toFixed(0) + ' mAh' : '--'],
+    ['Ah rechargés', v => v.since ? (v.since.ahC * 1000).toFixed(0) + ' mAh' : '--'],
+    ['Wh consommés', v => v.since ? v.since.whD.toFixed(1) + ' Wh' : '--'],
+    ['Wh rechargés', v => v.since ? v.since.whC.toFixed(1) + ' Wh' : '--'],
+    ['Distance', v => v.since ? (v.since.distM / 1000).toFixed(2) + ' km' : '--'],
+    ['Distance absolue', v => v.since ? (v.since.distAbsM / 1000).toFixed(2) + ' km' : '--']
+  ];
+
+  function fill(el, list, v){
+    el.innerHTML = list.map(r => `<div class="ride-row"><span>${r[0]}</span><b>${r[1](v)}</b></div>`).join('');
+  }
+  function paint(v){ fill($('#rideRows'), TRIP, v); fill($('#rideSince'), SINCE, v); }
+
+  VESC.listeners.add(v => {
+    const app = document.querySelector('#app-ride');
+    if(app && app.classList.contains('open')) paint(v);
+  });
+  $('#rideReset').addEventListener('click', () => { VESC.resetTrip(); paint(VESC); });
+  hooks.ride = () => { paint(VESC); VESC.emit(); };
+  paint(VESC);
+})();
+
+/* ==================== RÉGLAGES VESC ==================== */
+(function initVescSettings(){
+  const cfg = VESC.cfg;
+
+  function renderModes(){
+    const el = $('#vehModes');
+    el.innerHTML = '<div class="set-row" style="padding:5px 11px"><div style="flex:1;font-size:8.5px;letter-spacing:.8px;color:#8a8a8e">MODE</div><span style="width:50px;text-align:center;font-size:8.5px;color:#8a8a8e">MOTEUR</span><span style="width:50px;text-align:center;font-size:8.5px;color:#8a8a8e">BATT</span><span style="width:54px;text-align:center;font-size:8.5px;color:#8a8a8e">KM/H</span></div>' +
+      VESC.modes.map((m, i) => `<div class="set-row"><div class="set-name" style="flex:1;min-width:0">${esc(m.name)}</div>` +
+        `<input class="num-in" data-m="${i}" data-f="motor" type="number" min="1" max="300" step="1" value="${m.motor}" aria-label="Courant moteur ${esc(m.name)}">` +
+        `<input class="num-in" data-m="${i}" data-f="batt" type="number" min="1" max="300" step="1" value="${m.batt}" aria-label="Courant batterie ${esc(m.name)}">` +
+        `<input class="num-in" data-m="${i}" data-f="kmh" type="number" min="0" max="200" step="1" value="${m.kmh}" aria-label="Bride vitesse ${esc(m.name)}"></div>`).join('');
+  }
+
+  function sync(){
+    const set = (id, val) => { const el = $(id); if(el && document.activeElement !== el) el.value = val; };
+    set('#vehWheel', cfg.wheelIn); set('#vehPoles', cfg.poles); set('#vehGear', cfg.gear);
+    set('#vehCells', cfg.cells); set('#vehCellMin', cfg.cellMin); set('#vehCellMax', cfg.cellMax);
+    set('#vehMaxA', cfg.maxA);
+    $$('#vehSrc button').forEach(b => b.classList.toggle('on', b.dataset.src === cfg.src));
+    $$('#vehMap button').forEach(b => b.classList.toggle('on', b.dataset.mt === cfg.map));
+    renderModes();
+  }
+
+  function bindNum(sel, key, min, max, round){
+    const el = $(sel);
+    if(!el) return;
+    el.addEventListener('input', e => {
+      const v = parseFloat(String(e.target.value).replace(',', '.'));
+      if(!isFinite(v) || v < min || v > max) return;
+      cfg[key] = round ? Math.round(v) : v;
+      VESC.save(); VESC.emit();
+    });
+  }
+  bindNum('#vehWheel', 'wheelIn', 6, 30, false);
+  bindNum('#vehPoles', 'poles', 2, 60, true);
+  bindNum('#vehGear', 'gear', .1, 30, false);
+  bindNum('#vehCells', 'cells', 3, 30, true);
+  bindNum('#vehCellMin', 'cellMin', 2, 4, false);
+  bindNum('#vehCellMax', 'cellMax', 3, 4.5, false);
+  bindNum('#vehMaxA', 'maxA', 5, 300, true);
+
+  $('#vehSrc').addEventListener('click', e => {
+    const b = e.target.closest('[data-src]');
+    if(!b) return;
+    cfg.src = b.dataset.src;
+    VESC.save(); VESC.emit();
+    if(cfg.src !== 'vesc') VESC.startGps();
+    sync();
+  });
+  $('#vehMap').addEventListener('click', e => {
+    const b = e.target.closest('[data-mt]');
+    if(!b) return;
+    cfg.map = b.dataset.mt;
+    VESC.save(); VESC.emit();
+    if(window.__rideTiles) window.__rideTiles();
+    sync();
+  });
+  $('#vehModes').addEventListener('input', e => {
+    const inp = e.target.closest('input[data-m]');
+    if(!inp) return;
+    const i = +inp.dataset.m, f = inp.dataset.f;
+    const v = parseFloat(String(inp.value).replace(',', '.'));
+    if(!isFinite(v)) return;
+    if(f === 'motor' && (v < 1 || v > 300)) return;
+    if(f === 'batt' && (v < 1 || v > 300)) return;
+    if(f === 'kmh' && (v < 0 || v > 200)) return;
+    VESC.modes[i][f] = v;
+    VESC.save(); VESC.emit();
+  });
+
+  sync();
+})();
 
 /* ==================== RÉGLAGES ==================== */
 (function initSettings(){
