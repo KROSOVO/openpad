@@ -1,4 +1,4 @@
-const CACHE = 'openpad-v1.9.0';
+const CACHE = 'openpad-v1.9.1';
 const CORE = [
   './',
   './index.html',
@@ -31,6 +31,19 @@ self.addEventListener('fetch', event => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
+  if (req.mode === 'navigate') {
+    event.respondWith(
+      fetch(req).then(res => {
+        if (res && res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
+        }
+        return res;
+      }).catch(() => caches.match(req).then(hit => hit || caches.match('./index.html')))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then(cached => {
       const network = fetch(req).then(res => {
@@ -39,7 +52,7 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
         }
         return res;
-      }).catch(() => cached || caches.match('./index.html'));
+      }).catch(() => cached);
       return cached || network;
     })
   );
