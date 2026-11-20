@@ -556,6 +556,15 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
 #app-maps[data-hud="stark"] .map-search{top:auto;bottom:14px;left:16px;right:120px;width:auto;transform:none}
 #app-maps[data-hud="stark"] .map-results{top:auto;bottom:66px;left:16px;right:120px;width:auto;transform:none}
 #app-maps[data-hud="classic"] .mhud{bottom:16px}
+/* Barre de destination compacte + bouton accueil bas-gauche */
+#app-maps .app-home-btn{top:auto;bottom:14px;left:14px;right:auto;background:rgba(10,12,16,.55);border-color:rgba(255,255,255,.15);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+#app-maps .app-home-btn:hover{background:rgba(20,24,34,.75)}
+#app-maps[data-hud="stark"] .map-search{left:86px;right:auto;width:min(320px,46%);bottom:14px}
+#app-maps[data-hud="stark"] .map-results{left:86px;right:auto;width:min(320px,52%);bottom:64px}
+#app-maps[data-hud="stark"] .vh-time{bottom:84px}
+#app-maps[data-hud="stark"] .vh-acc{bottom:148px}
+#app-maps[data-hud="stark"] .vh-speed{bottom:214px}
+#app-maps[data-hud="classic"] .mhud{left:86px;bottom:16px}
 #app-maps[data-mapstyle="base"] .map-tint{opacity:1;background:linear-gradient(120deg,rgba(2,10,6,.42),rgba(0,12,6,.12) 55%,rgba(0,6,3,.35))}
 #app-maps[data-mapstyle="base"] .leaflet-tile-pane{filter:brightness(.72) saturate(.85)}
 #app-maps[data-mapstyle="base"] .leaflet-labels-pane{filter:brightness(.8) saturate(.6)}
@@ -1189,7 +1198,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
             <div class="set-group">
               <div class="set-label">À propos</div>
               <div class="set-card">
-                <div class="set-row"><div><div class="set-name">OpenPad OS 1.7.2</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
+                <div class="set-row"><div><div class="set-name">OpenPad OS 1.7.3</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
                 <div class="set-row"><div><div class="set-name">made by KROSOVO</div><div class="set-desc">Design &amp; développement</div></div></div>
               </div>
             </div>
