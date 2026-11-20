@@ -475,6 +475,49 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
 
 /* HUD de ride sur la carte */
 .ride-hud{position:absolute;left:16px;top:44px;z-index:6;background:rgba(12,16,24,.74);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:9px 12px;min-width:152px;color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.3)}
+
+/* HUD de carte style VESC (Varg / Stark) */
+.vhud{position:absolute;inset:0;z-index:6;pointer-events:none;display:none}
+#app-maps[data-mapstyle="varg"] .vhud,#app-maps[data-mapstyle="halo"] .vhud{display:block}
+#app-maps[data-mapstyle="varg"] .ride-hud,#app-maps[data-mapstyle="halo"] .ride-hud,
+#app-maps[data-mapstyle="varg"] .map-ctrls,#app-maps[data-mapstyle="halo"] .map-ctrls{display:none}
+#app-maps[data-mapstyle="varg"] .sb,#app-maps[data-mapstyle="halo"] .sb{display:none}
+.vh-mode{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:7px;min-width:96px;height:44px;padding:0 18px;border:2.5px solid #5dd67f;border-radius:999px;background:rgba(10,14,12,.45);color:#5dd67f;font:700 20px var(--font);pointer-events:auto;backdrop-filter:blur(10px);cursor:pointer}
+.vh-mode svg{width:15px;height:15px;fill:currentColor;flex:0 0 auto}
+.vh-batt{position:absolute;right:16px;top:16px;display:flex;align-items:center;gap:5px;height:44px;padding:0 18px;border-radius:999px;background:#5dd67f;color:#04200d;font:700 18px var(--font);font-variant-numeric:tabular-nums}
+.vh-batt::before{content:"";width:18px;height:10px;border:2px solid currentColor;border-radius:3px;background:linear-gradient(90deg,currentColor 72%,transparent 72%)}
+.vh-batt small{font-size:10px;font-weight:700}
+.vh-speed{position:absolute;left:20px;bottom:190px;display:flex;flex-direction:column;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.75);pointer-events:none}
+.vh-speed b{font-size:92px;font-weight:600;line-height:.86;letter-spacing:-3px;font-variant-numeric:tabular-nums}
+.vh-speed small{font-size:10px;letter-spacing:4px;color:#c9ccd2;margin-top:5px}
+.vh-acc{position:absolute;left:16px;bottom:126px;width:min(300px,62vw);height:56px;border-radius:14px;background:rgba(13,15,19,.85);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 2px 8px rgba(0,0,0,.6);color:#c9ccd2;font:11px "DM Mono",monospace;pointer-events:none}
+.vh-acc span{position:absolute;top:7px;line-height:1}
+.vh-acc .la{left:12px}
+.vh-acc .lz{left:calc(12px + (100% - 24px) * .45);transform:translateX(-50%)}
+.vh-acc .lx{right:12px}
+.vh-acc .lx small{font-size:9px;margin-right:4px;color:#7d828a}
+.vt{position:absolute;left:12px;right:12px;bottom:9px;height:10px;display:flex;justify-content:space-between;align-items:flex-end}
+.vt i{width:1px;height:5px;background:#7d828a}
+.vt i.mj{height:9px;background:#b4b8bf}
+.vn{position:absolute;bottom:6px;left:calc(12px + (100% - 24px) * .45);width:3px;height:22px;margin-left:-1.5px;border-radius:2px;background:#5dd67f;box-shadow:0 0 8px #5dd67f;transition:left .2s ease-out,background .2s}
+.vn.dr{background:#fff;box-shadow:0 0 8px #fff8}
+.vn.mx{background:#ff3b30;box-shadow:0 0 8px #ff3b30}
+.vh-time{position:absolute;left:16px;bottom:64px;display:flex;align-items:baseline;gap:6px;padding:10px 20px;border-radius:22px;background:rgba(18,20,26,.82);border:1px solid rgba(255,255,255,.08);color:#fff;font-size:30px;font-weight:600;backdrop-filter:blur(10px);font-variant-numeric:tabular-nums;pointer-events:none}
+.vh-time small{font-size:16px;color:#c9ccd2;font-weight:400;margin-right:4px}
+.vh-mapmode{position:absolute;right:16px;bottom:82px;z-index:7;display:none;align-items:center;gap:6px;height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(18,20,26,.82);color:#5dd67f;font:700 12px var(--font);letter-spacing:.6px;backdrop-filter:blur(10px);cursor:pointer}
+.vh-mapmode small{font-size:8px;color:#9aa0aa;font-weight:500;letter-spacing:1px}
+.vh-fs{position:absolute;right:16px;bottom:16px;z-index:7;display:none;width:52px;height:52px;border-radius:50%;background:#000;border:1px solid rgba(255,255,255,.2);color:#fff;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5);padding:0}
+#app-maps[data-mapstyle="varg"] .vh-mapmode,#app-maps[data-mapstyle="halo"] .vh-mapmode,
+#app-maps[data-mapstyle="varg"] .vh-fs,#app-maps[data-mapstyle="halo"] .vh-fs{display:flex}
+.map-go{display:none;border:0;border-radius:999px;background:#5dd67f;color:#04200d;font:700 11px var(--font);letter-spacing:1px;height:32px;padding:0 16px;cursor:pointer;flex:0 0 auto}
+#app-maps[data-mapstyle="varg"] .map-search,#app-maps[data-mapstyle="halo"] .map-search{top:auto;bottom:14px;left:64px;right:120px;width:auto;transform:none;height:44px;border-radius:999px;background:rgba(18,20,26,.78);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);padding:0 6px 0 18px}
+#app-maps[data-mapstyle="varg"] .map-search input,#app-maps[data-mapstyle="halo"] .map-search input{color:#fff}
+#app-maps[data-mapstyle="varg"] .map-search input::placeholder,#app-maps[data-mapstyle="halo"] .map-search input::placeholder{color:#9aa0aa}
+#app-maps[data-mapstyle="varg"] .map-search>svg,#app-maps[data-mapstyle="halo"] .map-search>svg,
+#app-maps[data-mapstyle="varg"] .map-clear,#app-maps[data-mapstyle="halo"] .map-clear{display:none}
+#app-maps[data-mapstyle="varg"] .map-go,#app-maps[data-mapstyle="halo"] .map-go{display:block}
+#app-maps[data-mapstyle="varg"] .map-results,#app-maps[data-mapstyle="halo"] .map-results{top:auto;bottom:66px;left:64px;right:120px;width:auto;transform:none}
+#app-maps[data-mapstyle="varg"] .map-sheet,#app-maps[data-mapstyle="halo"] .map-sheet{bottom:auto;top:76px}
 .rh-speed{display:flex;align-items:baseline;gap:5px}
 .rh-speed b{font-size:30px;font-weight:600;letter-spacing:-1.6px;line-height:1}
 .rh-speed small{font-size:9px;letter-spacing:1.6px;color:rgba(255,255,255,.5)}
@@ -610,7 +653,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
 /* Cartes liées au style */
 .map-tint{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s}
 #app-maps[data-mapstyle="varg"] .map-tint{opacity:1;background:linear-gradient(120deg,rgba(2,16,8,.74),rgba(0,20,10,.22) 55%,rgba(0,10,5,.6))}
-#app-maps[data-mapstyle="halo"] .map-tint{opacity:1;background:linear-gradient(120deg,rgba(8,10,40,.72),rgba(20,20,70,.2),rgba(5,6,25,.62))}
+#app-maps[data-mapstyle="halo"] .map-tint{opacity:1;background:linear-gradient(120deg,rgba(2,16,8,.74),rgba(0,20,10,.22) 55%,rgba(0,10,5,.6))}
 #app-maps[data-mapstyle="race"] .map-tint{opacity:1;background:linear-gradient(120deg,rgba(30,4,4,.6),rgba(40,10,5,.12),rgba(10,2,2,.55))}
 #app-maps .leaflet-tile-pane{transition:filter .35s}
 #app-maps[data-mapstyle="dark"] .leaflet-tile-pane,
@@ -649,7 +692,9 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
 
 /* Galerie de styles */
 .gstyle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:9px 11px}
-.gstyle-grid button{height:30px;border-radius:7px;border:1px solid rgba(60,60,67,.14);background:#f7f7fa;color:#555;font:600 9.5px var(--font);letter-spacing:.3px;cursor:pointer;transition:.15s}
+.gstyle-grid button{height:auto;min-height:50px;border-radius:7px;border:1px solid rgba(60,60,67,.14);background:#f7f7fa;color:#555;font:600 9px var(--font);letter-spacing:.2px;cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 3px}
+.gstyle-grid .gp{width:100%;height:28px;display:flex;align-items:center;justify-content:center}
+.gstyle-grid .gp svg{width:54px;height:28px;display:block;overflow:visible}
 .gstyle-grid button:hover{background:#eef0f4}
 .gstyle-grid button.on{background:#0a84ff;border-color:#0a84ff;color:#fff}
 #stage[data-theme="dark"] #app-settings .gstyle-grid button{background:#0b0c0f;border-color:rgba(255,255,255,.12);color:#9aa0aa}
@@ -755,6 +800,23 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
       <section class="app" data-app="maps" data-sb="dark" id="app-maps">
         <div id="map"></div>
         <div class="map-tint"></div>
+        <div class="vhud" id="vhud">
+          <button class="vh-mode" id="vhMode" aria-label="Changer de mode">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M13.5 1.5 4 14h6.5L9 22.5 20 9.5h-6.8z"/></svg>
+            <span id="vhModeNum">1</span>
+          </button>
+          <div class="vh-batt"><span id="vhBat">--</span><small>%</small></div>
+          <div class="vh-speed"><b id="vhSpeed">0</b><small>KM/H</small></div>
+          <div class="vh-acc">
+            <span class="la">REG</span><span class="lz">0</span><span class="lx"><small>MIN</small>MAX</span>
+            <div class="vt" id="vhTicks"></div><i class="vn" id="vhNeedle"></i>
+          </div>
+          <div class="vh-time"><b id="vhH">0</b><small>h</small><b id="vhM">00</b><small>m</small></div>
+        </div>
+        <button class="vh-mapmode" id="vhMapMode"><span id="vhMapModeTxt">ECO</span><small>MODE</small></button>
+        <button class="vh-fs" id="vhFs" aria-label="Plein écran">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+        </button>
         <div class="ride-hud" id="rideHud">
           <div class="rh-speed"><b id="gSpeed">0</b><small>KM/H</small></div>
           <div class="rh-items"><span>Batt <b id="gSoc">--</b>%</span><span><b id="gKw">--</b> kW</span></div>
@@ -763,6 +825,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
         <div class="map-search">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8a8e" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
           <input id="mapQ" placeholder="Destination, adresse…" autocomplete="off" />
+          <button id="mapGo" class="map-go" type="button">GO</button>
           <button id="mapClear" class="map-clear" aria-label="Effacer">×</button>
         </div>
         <div class="map-results" id="mapResults"></div>
@@ -1068,7 +1131,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
             <div class="set-group">
               <div class="set-label">À propos</div>
               <div class="set-card">
-                <div class="set-row"><div><div class="set-name">OpenPad OS 1.5.2</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
+                <div class="set-row"><div><div class="set-name">OpenPad OS 1.6</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
                 <div class="set-row"><div><div class="set-name">made by KROSOVO</div><div class="set-desc">Design &amp; développement</div></div></div>
               </div>
             </div>
@@ -2241,7 +2304,40 @@ function renderMusic(p){
     $('#gKw').textContent = v.state.kw != null ? v.state.kw.toFixed(1) : '--';
     $('#gMode').textContent = v.modes[v.mode].name;
     $('#gTrip').textContent = v.trip.toFixed(1);
+    /* HUD Varg / Stark */
+    $('#vhSpeed').textContent = Math.round(v.state.speed || 0);
+    $('#vhBat').textContent = v.state.soc != null ? Math.round(v.state.soc) : '--';
+    $('#vhModeNum').textContent = v.mode + 1;
+    $('#vhModeNum').parentElement.title = v.modes[v.mode].name;
+    $('#vhMapModeTxt').textContent = v.modes[v.mode].name;
+    const secs = Math.max(0, v.stats.t || 0);
+    $('#vhH').textContent = Math.floor(secs / 3600);
+    $('#vhM').textContent = String(Math.floor(secs / 60) % 60).padStart(2, '0');
+    const mc = v.state.mc || 0;
+    const lim = (v.modes[v.mode] && v.modes[v.mode].motor) || 50;
+    const p = mc >= 0 ? .45 + .55 * Math.min(1, mc / lim) : .45 - .45 * Math.min(1, -mc / (lim * .5));
+    const needle = $('#vhNeedle');
+    needle.style.left = 'calc(12px + (100% - 24px) * ' + p.toFixed(3) + ')';
+    needle.className = 'vn' + (mc >= lim * .9 ? ' mx' : mc > 0 ? ' dr' : '');
   }
+
+  (function buildVhTicks(){
+    const el = $('#vhTicks');
+    if(!el) return;
+    let t = '';
+    for(let i = 0; i <= 20; i++) t += '<i' + (i % 5 === 0 ? ' class="mj"' : '') + '></i>';
+    el.innerHTML = t;
+  })();
+
+  if($('#vhMode')) $('#vhMode').addEventListener('click', () => { VESC.setMode(VESC.mode + 1); renderHud(VESC); });
+  if($('#vhMapMode')) $('#vhMapMode').addEventListener('click', () => { VESC.setMode(VESC.mode + 1); renderHud(VESC); });
+  if($('#mapGo')) $('#mapGo').addEventListener('click', () => doSearch($('#mapQ').value));
+  if($('#vhFs')) $('#vhFs').addEventListener('click', async () => {
+    try{
+      if(document.fullscreenElement) await document.exitFullscreen();
+      else if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+    }catch(e){}
+  });
 
   function initMap(){
     if(ready) return;
@@ -2793,9 +2889,18 @@ function sendVescFrame(force){
 (function initVescSettings(){
   const cfg = VESC.cfg;
   const GSTYLES = [['base','Base'],['varg','Varg'],['flux','Flux'],['race','Race'],['moto','Moto'],['analog','Analog'],['halo','Halo']];
+  const PREVIEWS = {
+    base: '<svg viewBox="0 0 60 30"><path d="M8 27A22 22 0 1 1 52 27" fill="none" stroke="#2f7bff" stroke-width="4" stroke-linecap="round"/><text x="30" y="23" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">42</text></svg>',
+    varg: '<svg viewBox="0 0 60 30"><path d="M5 27A25 25 0 1 1 55 27" fill="none" stroke="#5dd67f" stroke-width="3" stroke-linecap="round"/><rect x="3" y="3" width="16" height="6" rx="3" fill="none" stroke="#5dd67f"/><rect x="41" y="3" width="16" height="6" rx="3" fill="#5dd67f"/><text x="30" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">42</text></svg>',
+    flux: '<svg viewBox="0 0 60 30"><circle cx="30" cy="16" r="11" fill="none" stroke="#2f7bff" stroke-width="4" stroke-dasharray="3 2"/><text x="30" y="21" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">42</text></svg>',
+    race: '<svg viewBox="0 0 60 30"><text x="12" y="17" text-anchor="middle" font-size="13" font-weight="700" fill="#ff6b4a">42</text><g fill="#2f7bff"><rect x="24" y="8" width="3" height="8"/><rect x="29" y="8" width="3" height="8"/><rect x="34" y="8" width="3" height="8"/><rect x="39" y="8" width="3" height="8"/><rect x="44" y="8" width="3" height="8"/><rect x="49" y="8" width="3" height="8"/></g><rect x="24" y="21" width="28" height="2" fill="#ff6b4a"/></svg>',
+    moto: '<svg viewBox="0 0 60 30"><g fill="#3ddc84"><rect x="4" y="3" width="4" height="4"/><rect x="10" y="3" width="4" height="4"/><rect x="16" y="3" width="4" height="4"/><rect x="22" y="3" width="4" height="4"/></g><g fill="#ffb020"><rect x="28" y="3" width="4" height="4"/><rect x="34" y="3" width="4" height="4"/></g><text x="30" y="21" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">42</text><rect x="4" y="24" width="18" height="3" fill="#3ddc84"/><rect x="38" y="24" width="18" height="3" fill="#3ddc84"/></svg>',
+    analog: '<svg viewBox="0 0 60 30"><circle cx="17" cy="16" r="10" fill="#151518" stroke="#8b8f98" stroke-width="2"/><circle cx="43" cy="16" r="10" fill="#151518" stroke="#8b8f98" stroke-width="2"/><line x1="17" y1="16" x2="22" y2="9" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="43" y1="16" x2="37" y2="10" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="16" r="2" fill="#aaa"/><circle cx="43" cy="16" r="2" fill="#aaa"/></svg>',
+    halo: '<svg viewBox="0 0 60 30"><circle cx="30" cy="16" r="11" fill="none" stroke="#8f74ff" stroke-width="4" stroke-dasharray="55 20" stroke-linecap="round" transform="rotate(-90 30 16)"/><text x="30" y="21" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">42</text></svg>'
+  };
 
   $('#gstyleGrid').innerHTML = GSTYLES.map(([g, n]) =>
-    `<button type="button" data-g="${g}" class="${(cfg.gauge || 'base') === g ? 'on' : ''}">${n}</button>`).join('');
+    `<button type="button" data-g="${g}" class="${(cfg.gauge || 'base') === g ? 'on' : ''}"><span class="gp">${PREVIEWS[g]}</span><span>${n}</span></button>`).join('');
   $('#gstyleGrid').addEventListener('click', e => {
     const b = e.target.closest('[data-g]');
     if(b && window.__setGauge) window.__setGauge(b.dataset.g);
