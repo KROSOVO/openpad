@@ -1,6 +1,6 @@
 # OpenPad
 
-🚀 **Pré-release en ligne :** https://KROSOVO.github.io/openpad/pre-release/
+🚀 **Pré-release en ligne :** https://krosovo.github.io/openpad/pre-release/
 
 📲 **Installer sur Android :** ouvrir la pré-release dans **Chrome**, puis menu **⋮ → « Installer l'application »** (ou « Ajouter à l'écran d'accueil »).
 
