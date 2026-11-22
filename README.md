@@ -32,6 +32,16 @@ Sur iPhone / iPad, ouvrez l'application dans Safari puis **Partager** → **Sur 
 
 Les versions antérieures sont conservées dans le dossier [`Pre-Releases/`](Pre-Releases/).
 
+## 🧭 Version de base (sans CarPlay) : VESC Dash
+
+OpenPad est la version **CarPlay** du projet. La version de base, sans dock ni applications, c'est **VESC Dash**.
+
+➡️ [**Page du projet VESC Dash**](https://KROSOVO.github.io/vesc-dashboard/)
+
+➡️ [**Dernière version — V0.76**](https://KROSOVO.github.io/vesc-dashboard/Pre-Releases/V0.76.html)
+
+➡️ [**Dépôt GitHub VESC Dash**](https://github.com/KROSOVO/vesc-dashboard)
+
 ## ✨ Fonctionnalités
 
 ### 🏎️ Compteur VESC — identique au Dashboard
