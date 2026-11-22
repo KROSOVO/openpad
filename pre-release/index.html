@@ -81,6 +81,7 @@ button{font-family:inherit}
 
 .art-phone{background:linear-gradient(168deg,#8bf07c 0%,#4cdd54 30%,#1fbd3c 72%,#0f9b31 100%)}
 .art-music{background:linear-gradient(168deg,#ff8ba2 0%,#ff3d68 36%,#dd0f3e 100%)}
+.art-spotify{background:linear-gradient(168deg,#3bf07f 0%,#1ed760 42%,#0fa844 100%)}
 .art-maps{background:linear-gradient(168deg,#ffffff 0%,#f1ede2 100%)}
 .art-messages{background:linear-gradient(168deg,#8cf58c 0%,#33d24b 40%,#0aab26 100%)}
 .art-listen{background:linear-gradient(168deg,#ffffff 0%,#eeeef2 100%)}
@@ -244,27 +245,8 @@ button{font-family:inherit}
 
 /* ============ Musique ============ */
 .app-dark{background:linear-gradient(180deg,#1b1b22 0%,#0b0b10 60%)}
-.music-head{padding-bottom:2px}
-.spot-btn{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:9px;border:1px solid rgba(30,215,96,.4);background:rgba(30,215,96,.12);color:#5dd67f;font:700 10.5px var(--font);letter-spacing:.4px;cursor:pointer;flex:0 0 auto}
-.spot-btn:hover{background:rgba(30,215,96,.2)}
-.spot-panel{position:absolute;inset:0;z-index:130;display:flex;align-items:center;justify-content:center;background:rgba(5,6,9,.72);backdrop-filter:blur(10px)}
-.spot-panel[hidden]{display:none}
-.spot-card{width:min(520px,88%);max-height:82%;overflow:auto;background:#141519;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;box-shadow:0 20px 60px rgba(0,0,0,.6);color:#f2f2f4}
-.spot-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.spot-logo{color:#1ed760;display:flex}
-.spot-head b{font-size:13.5px;letter-spacing:-.2px}
-.spot-close{margin-left:auto;border:0;background:rgba(255,255,255,.1);color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1}
-.spot-note{font-size:10.5px;color:rgba(255,255,255,.55);line-height:1.45;margin:6px 0}
-.spot-input{width:100%;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#0b0c0f;color:#fff;padding:0 10px;font:11px var(--font);outline:none;margin:4px 0 8px}
-.spot-btn2{display:inline-flex;align-items:center;border:0;border-radius:8px;background:#1ed760;color:#06220f;font:700 11px var(--font);padding:8px 14px;cursor:pointer;text-decoration:none}
-.spot-btn2.alt{background:rgba(255,255,255,.1);color:#fff}
-.spot-code{font-family:monospace;font-size:9.5px;background:#0b0c0f;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 8px;word-break:break-all;color:#cfd3da;margin:2px 0 8px;user-select:all}
-.spot-me{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.spot-me img{width:30px;height:30px;border-radius:50%}
-.spot-row{display:flex;align-items:center;gap:8px;padding:6px 4px;border-top:1px solid rgba(255,255,255,.06);font-size:11px}
-.spot-row a{color:#dfe3ea;text-decoration:none}
-.spot-row a:hover{text-decoration:underline}
-.spot-err{color:#ff6b63;font-size:10.5px;line-height:1.4}
+.spot-embed{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;background:#121212}
+.spot-frame{flex:0 0 auto;width:720px;max-width:100%;height:400px;border:0;background:#121212;display:block;color-scheme:dark}
 .music-body{display:flex;gap:20px;padding:4px 20px 12px;min-height:0;position:relative}
 .np{width:248px;display:flex;flex-direction:column;align-items:center;flex:0 0 auto}
 .cover{width:148px;height:148px;border-radius:13px;position:relative;overflow:hidden;box-shadow:0 16px 34px rgba(0,0,0,.55);transition:background .5s;flex:0 0 auto}
@@ -1011,48 +993,10 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
         <div class="call-screen" id="callScreen"></div>
       </section>
 
-      <!-- ============ MUSIQUE ============ -->
+      <!-- ============ SPOTIFY ============ -->
       <section class="app app-dark" data-app="music" data-sb="light" id="app-music">
-        <header class="apphead music-head"><h1>Musique</h1><span class="head-sub">Écoutez maintenant</span><button class="spot-btn" id="spotifyBtn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.8.8 0 0 1-1.1.3c-3-1.8-6.8-2.2-11.3-1.2a.8.8 0 1 1-.3-1.6c4.9-1.1 9.1-.6 12.4 1.4.4.2.5.7.3 1.1zm1.2-2.8a1 1 0 0 1-1.3.3c-3.4-2.1-8.6-2.7-12.6-1.5a1 1 0 1 1-.6-1.9c4.6-1.4 10.3-.7 14.2 1.7.5.3.6.9.3 1.4zm.1-2.9c-4.1-2.4-10.8-2.6-14.7-1.5a1.2 1.2 0 1 1-.7-2.3C7 5.6 14.4 5.9 19.1 8.7a1.2 1.2 0 1 1-1.2 2z"/></svg>Spotify</button></header>
-        <div class="appbody music-body">
-          <div class="np">
-            <div class="cover" id="musicCover"><span class="cover-note">♪</span></div>
-            <div class="np-info">
-              <div class="np-title" id="musicTitle">—</div>
-              <div class="np-artist" id="musicArtist">—</div>
-            </div>
-            <div class="scrub" id="musicScrub"><div class="scrub-fill" id="musicFill"></div></div>
-            <div class="scrub-times"><span id="musicTime">0:00</span><span id="musicDur">0:00</span></div>
-            <div class="controls">
-              <button id="mShuffle" class="ctl sm" title="Aléatoire">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg>
-              </button>
-              <button id="mPrev" class="ctl" title="Précédent">
-                <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="2.4" height="14" rx="1.2"/><path d="M19 5.6v12.8c0 .9-1 1.4-1.7.9L9.4 13a1.2 1.2 0 0 1 0-2l7.9-6.3c.7-.5 1.7 0 1.7.9z"/></svg>
-              </button>
-              <button id="mPlay" class="ctl play" title="Lecture">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.3c0-.9 1-1.5 1.8-1l9.3 5.9a1.2 1.2 0 0 1 0 2l-9.3 5.9c-.8.5-1.8-.1-1.8-1V5.3z"/></svg>
-              </button>
-              <button id="mNext" class="ctl" title="Suivant">
-                <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><rect x="16.6" y="5" width="2.4" height="14" rx="1.2"/><path d="M5 5.6v12.8c0 .9 1 1.4 1.7.9L14.6 13a1.2 1.2 0 0 0 0-2L6.7 4.7C6 4.2 5 4.7 5 5.6z"/></svg>
-              </button>
-              <button id="mRepeat" class="ctl sm" title="Répéter">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-              </button>
-            </div>
-            <div class="volrow">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <input type="range" id="musicVol" min="0" max="100" value="55" aria-label="Volume" />
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19.5 6a9 9 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-          </div>
-          <div class="playlist" id="musicList"></div>
-        </div>
-        <div class="spot-panel" id="spotifyPanel" hidden>
-          <div class="spot-card">
-            <div class="spot-head"><span class="spot-logo"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.8.8 0 0 1-1.1.3c-3-1.8-6.8-2.2-11.3-1.2a.8.8 0 1 1-.3-1.6c4.9-1.1 9.1-.6 12.4 1.4.4.2.5.7.3 1.1zm1.2-2.8a1 1 0 0 1-1.3.3c-3.4-2.1-8.6-2.7-12.6-1.5a1 1 0 1 1-.6-1.9c4.6-1.4 10.3-.7 14.2 1.7.5.3.6.9.3 1.4zm.1-2.9c-4.1-2.4-10.8-2.6-14.7-1.5a1.2 1.2 0 1 1-.7-2.3C7 5.6 14.4 5.9 19.1 8.7a1.2 1.2 0 1 1-1.2 2z"/></svg></span><b>Compte Spotify</b><button class="spot-close" id="spotifyClose" aria-label="Fermer">×</button></div>
-            <div id="spotifyBody"></div>
-          </div>
+        <div class="spot-embed">
+          <iframe id="spotFrame" class="spot-frame" title="Spotify" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&amp;theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         </div>
       </section>
 
@@ -1290,7 +1234,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
             <div class="set-group">
               <div class="set-label">À propos</div>
               <div class="set-card">
-                <div class="set-row"><div><div class="set-name">OpenPad OS 1.10.2</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
+                <div class="set-row"><div><div class="set-name">OpenPad OS 1.10.3</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
                 <div class="set-row set-row-btn" id="installRow" hidden><div><div class="set-name">Installer l'application</div><div class="set-desc">Ajouter OpenPad à l'écran d'accueil</div></div></div>
                 <div class="set-row"><div><div class="set-name">made by KROSOVO</div><div class="set-desc">Design &amp; développement</div></div></div>
               </div>
@@ -1355,7 +1299,7 @@ setTimeout(fit, 200);
 /* ---------- Icônes ---------- */
 const ICONS = {
   phone: `<div class="art art-phone"><svg viewBox="0 0 24 24" width="44" height="44" fill="#fff"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg></div>`,
-  music: `<div class="art art-music"><svg viewBox="0 0 24 24" width="41" height="41"><g fill="#fff"><path d="M8.3 6.2 20.4 4v3.3L8.3 9.5z"/><rect x="8.3" y="6" width="1.9" height="10.6" rx=".5"/><rect x="18.5" y="4" width="1.9" height="10.6" rx=".5"/><ellipse cx="6.9" cy="17.1" rx="3.2" ry="2.7" transform="rotate(-16 6.9 17.1)"/><ellipse cx="17.1" cy="15.1" rx="3.2" ry="2.7" transform="rotate(-16 17.1 15.1)"/></g></svg></div>`,
+  music: `<div class="art art-spotify"><svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="#000" stroke-width="2.1" stroke-linecap="round"><path d="M5.6 8.9c4.3-1.2 9.1-.8 12.8 1.2"/><path d="M6.5 12.5c3.5-.9 7.4-.6 10.4 1"/><path d="M7.4 15.9c2.7-.6 5.6-.4 7.9.8"/></svg></div>`,
   maps: `<div class="art art-maps"><svg viewBox="0 0 76 76" width="76" height="76"><rect width="76" height="76" fill="#f6f5ee"/><path d="M0 0h32L0 36z" fill="#a6d8a4"/><path d="M76 8 30 76h-9L76 17z" fill="#e9dfc6" opacity=".9"/><path d="M16 76 60 10" stroke="#efe6cf" stroke-width="8"/><path d="M0 60c13-4 24 2 33 16" stroke="#8fd0e8" stroke-width="6" fill="none"/><path d="M47 61c-6.5-9-13-16-13-24a13 13 0 1 1 26 0c0 8-6.5 15-13 24z" fill="#2f8bfd" stroke="#fff" stroke-width="2.6"/><circle cx="47" cy="36" r="4.8" fill="#fff"/></svg></div>`,
   messages: `<div class="art art-messages"><svg viewBox="0 0 76 76" width="76" height="76"><path fill="#fff" d="M38 17c-12.7 0-23 7.6-23 17 0 5.4 3.2 10.2 8.2 13.3-.4 3.4-1.9 6.6-4.5 9.2 4.9-.2 9.3-1.7 12.7-4.1 2.2.6 4.5.9 6.6.9 12.7 0 23-7.6 23-17S50.7 17 38 17z"/></svg></div>`,
   listen: `<div class="art art-listen"><div class="barsicon"><i style="height:16px;background:#6a5cff"></i><i style="height:27px;background:#8f57ff"></i><i style="height:38px;background:#c44dff"></i><i style="height:24px;background:#ff4d8d"></i><i style="height:42px;background:#ff5f6d"></i><i style="height:30px;background:#ff8a3d"></i><i style="height:18px;background:#ffb03a"></i><span class="dotb"></span></div></div>`,
@@ -1367,7 +1311,7 @@ const ICONS = {
 };
 
 const GRID = ['phone','messages','music','listen','maps','weather','calendar','speedo','ride','settings'];
-const LABEL = { phone:'Téléphone', music:'Musique', maps:'Plans', messages:'Messages', listen:"À l'écoute", speedo:'Compteur', ride:'Bilan de ride', weather:'Météo', calendar:'Calendrier', settings:'Réglages' };
+const LABEL = { phone:'Téléphone', music:'Spotify', maps:'Plans', messages:'Messages', listen:"À l'écoute", speedo:'Compteur', ride:'Bilan de ride', weather:'Météo', calendar:'Calendrier', settings:'Réglages' };
 
 function renderHome(){
   $('#grid').innerHTML = GRID.map(id =>
@@ -2087,25 +2031,6 @@ function coverStyle(t){
 function renderMusic(p){
   const t = p.track || TRACKS[p.idx];
   const pos = Math.min(p.position(), t.dur);
-  $('#musicTitle').textContent = t.title;
-  $('#musicArtist').textContent = t.artist + ' — ' + t.album;
-  $('#musicCover').style.background = coverStyle(t);
-  $('#musicFill').style.width = (pos / t.dur * 100) + '%';
-  $('#musicTime').textContent = fmt(pos);
-  $('#musicDur').textContent = fmt(t.dur);
-  $('#mPlay').innerHTML = p.playing ? ICO_PAUSE : ICO_PLAY;
-  $('#mShuffle').classList.toggle('on', !!p.shuffle);
-  $('#mRepeat').classList.toggle('on', !!p.repeat);
-  $$('#musicList .pl-item').forEach((el, i) => {
-    const on = i === p.idx;
-    el.classList.toggle('on', on);
-    const idxEl = el.querySelector('.pl-idx');
-    if(on && p.playing){
-      idxEl.innerHTML = '<span class="eq"><i></i><i></i><i></i><i></i></span>';
-    } else {
-      idxEl.textContent = (i + 1);
-    }
-  });
   const mt = $('#miniTitle');
   if(mt){
     $('#miniTitle').textContent = t.title;
@@ -2115,86 +2040,6 @@ function renderMusic(p){
     $('#miniPlay').innerHTML = p.playing ? ICO_PAUSE_XS : ICO_PLAY_XS;
   }
 }
-
-(function initMusic(){
-  const list = $('#musicList');
-  list.innerHTML = TRACKS.map((t, i) => `
-    <div class="pl-item" data-i="${i}">
-      <span class="pl-idx">${i + 1}</span>
-      <span class="pl-cover" style="background:${coverStyle(t)}"></span>
-      <div style="min-width:0;flex:1">
-        <div class="pl-tt">${esc(t.title)}</div>
-        <div class="pl-ar">${esc(t.artist)}</div>
-      </div>
-      <span class="pl-dur">${fmt(t.dur)}</span>
-    </div>`).join('');
-
-  list.addEventListener('click', e => {
-    const it = e.target.closest('.pl-item');
-    if(it) Player.play(+it.dataset.i);
-  });
-  $('#mPlay').addEventListener('click', () => Player.toggle());
-  $('#mNext').addEventListener('click', () => Player.next());
-  $('#mPrev').addEventListener('click', () => Player.prev());
-  $('#mShuffle').addEventListener('click', () => { Player.shuffle = !Player.shuffle; Player.emit(); });
-  $('#mRepeat').addEventListener('click', () => { Player.repeat = !Player.repeat; Player.emit(); });
-  $('#musicScrub').addEventListener('click', e => {
-    const r = e.currentTarget.getBoundingClientRect();
-    Player.seek((e.clientX - r.left) / r.width);
-  });
-  $('#musicVol').addEventListener('input', e => setVolume(e.target.value));
-  Player.listeners.add(renderMusic);
-  renderMusic(Player);
-})();
-
-/* ==================== SPOTIFY (profil) ==================== */
-(function initSpotify(){
-  const panel = $('#spotifyPanel');
-  const body = $('#spotifyBody');
-  if(!panel || !body) return;
-  const K = 'spotProfile';
-
-  function parseProfile(v){
-    v = (v || '').trim();
-    if(!v) return '';
-    const m = v.match(/spotify\.com\/user\/([^/?#]+)/i);
-    if(m) return decodeURIComponent(m[1]);
-    return v.replace(/^@/, '').trim();
-  }
-
-  function render(){
-    const id = store.get(K, '');
-    if(id){
-      body.innerHTML =
-        '<div class="spot-me"><div><div style="font-size:12px;font-weight:600">' + esc(id) + '</div>' +
-        '<div style="font-size:10px;color:rgba(255,255,255,.5)">Profil Spotify associé</div></div></div>' +
-        '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">' +
-        '<a class="spot-btn2" href="https://open.spotify.com/user/' + encodeURIComponent(id) + '" target="_blank" rel="noopener">Mon compte</a>' +
-        '<a class="spot-btn2 alt" href="https://open.spotify.com/" target="_blank" rel="noopener">Ouvrir Spotify</a>' +
-        '<button class="spot-btn2 alt" id="spotUnlink">Délier</button></div>' +
-        '<div class="spot-note">Lien vers ton profil Spotify. Aucun mot de passe n\'est demandé et rien n\'est envoyé à Spotify.</div>';
-      const off = $('#spotUnlink');
-      if(off) off.addEventListener('click', () => { store.del(K); render(); });
-    } else {
-      body.innerHTML =
-        '<div class="spot-note">Entre le lien de ton profil Spotify (ou ton pseudo) pour l\'associer à l\'app. Pas besoin de Spotify Developer, aucun mot de passe.</div>' +
-        '<input class="spot-input" id="spotProfileInput" placeholder="https://open.spotify.com/user/... ou @pseudo" autocomplete="off">' +
-        '<button class="spot-btn2" id="spotLink">Lier mon compte</button>' +
-        '<div class="spot-note" style="margin-top:8px">Un vrai login API Spotify nécessite une application Spotify Developer ; ici on lie simplement ton profil public.</div>';
-      const go = $('#spotLink');
-      if(go) go.addEventListener('click', () => {
-        const id = parseProfile($('#spotProfileInput') ? $('#spotProfileInput').value : '');
-        if(!id){ alert('Entre ton lien de profil ou ton pseudo Spotify.'); return; }
-        store.set(K, id);
-        render();
-      });
-    }
-  }
-
-  $('#spotifyBtn')?.addEventListener('click', () => { panel.hidden = false; render(); });
-  $('#spotifyClose')?.addEventListener('click', () => { panel.hidden = true; });
-  panel.addEventListener('click', e => { if(e.target === panel) panel.hidden = true; });
-})();
 
 /* ==================== À L'ÉCOUTE ==================== */
 (function initListen(){
