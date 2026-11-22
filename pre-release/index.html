@@ -1290,7 +1290,7 @@ input[type=range]::-moz-range-thumb{width:12px;height:12px;border:0;border-radiu
             <div class="set-group">
               <div class="set-label">À propos</div>
               <div class="set-card">
-                <div class="set-row"><div><div class="set-name">OpenPad OS 1.10.1</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
+                <div class="set-row"><div><div class="set-name">OpenPad OS 1.10.2</div><div class="set-desc">HTML · CSS · JS · Leaflet · VESC · OpenStreetMap</div></div></div>
                 <div class="set-row set-row-btn" id="installRow" hidden><div><div class="set-name">Installer l'application</div><div class="set-desc">Ajouter OpenPad à l'écran d'accueil</div></div></div>
                 <div class="set-row"><div><div class="set-name">made by KROSOVO</div><div class="set-desc">Design &amp; développement</div></div></div>
               </div>
@@ -2147,142 +2147,53 @@ function renderMusic(p){
   renderMusic(Player);
 })();
 
-/* ==================== SPOTIFY ==================== */
+/* ==================== SPOTIFY (profil) ==================== */
 (function initSpotify(){
   const panel = $('#spotifyPanel');
   const body = $('#spotifyBody');
   if(!panel || !body) return;
-  const K_CLIENT = 'spotClient', K_TOK = 'spotAccess', K_REF = 'spotRefresh', K_USER = 'spotUser';
+  const K = 'spotProfile';
 
-  const redirectURI = () => location.protocol === 'file:' ? '' : (location.origin + location.pathname.replace(/index\.html?$/i, ''));
-  const b64url = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  async function challengeFor(v){
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v));
-    return b64url(new Uint8Array(buf));
-  }
-  const randomStr = () => {
-    const a = new Uint8Array(48);
-    crypto.getRandomValues(a);
-    return b64url(a);
-  };
-
-  async function loadMe(){
-    try{
-      const r = await fetch('https://api.spotify.com/v1/me', { headers:{ Authorization:'Bearer ' + store.get(K_TOK,'') } });
-      if(!r.ok) throw new Error('Profil Spotify indisponible');
-      store.set(K_USER, await r.json());
-    }catch(e){ return; }
-  }
-  async function playlists(){
-    try{
-      const r = await fetch('https://api.spotify.com/v1/me/playlists?limit=8', { headers:{ Authorization:'Bearer ' + store.get(K_TOK,'') } });
-      if(!r.ok) return [];
-      const j = await r.json();
-      return j.items || [];
-    }catch(e){ return []; }
+  function parseProfile(v){
+    v = (v || '').trim();
+    if(!v) return '';
+    const m = v.match(/spotify\.com\/user\/([^/?#]+)/i);
+    if(m) return decodeURIComponent(m[1]);
+    return v.replace(/^@/, '').trim();
   }
 
-  async function connect(){
-    if(location.protocol === 'file:'){
-      alert('La connexion Spotify nécessite la version en ligne (GitHub Pages).');
-      return;
-    }
-    const cidInput = $('#spotClient');
-    const cid = (cidInput && cidInput.value.trim()) || store.get(K_CLIENT,'');
-    if(!cid){ alert('Entre le Client ID de ton application Spotify.'); return; }
-    store.set(K_CLIENT, cid);
-    const verifier = randomStr();
-    sessionStorage.setItem('spot_verifier', verifier);
-    let challenge;
-    try{ challenge = await challengeFor(verifier); }
-    catch(e){ alert('Impossible de préparer la connexion Spotify (HTTPS requis).'); return; }
-    const p = new URLSearchParams({
-      client_id: cid,
-      response_type: 'code',
-      redirect_uri: redirectURI(),
-      code_challenge_method: 'S256',
-      code_challenge: challenge,
-      scope: 'user-read-private playlist-read-private user-read-email',
-      state: 'openpad'
-    });
-    location.href = 'https://accounts.spotify.com/authorize?' + p.toString();
-  }
-
-  async function handleCode(){
-    const params = new URLSearchParams(location.search);
-    const code = params.get('code');
-    if(!code) return;
-    const verifier = sessionStorage.getItem('spot_verifier');
-    const cid = store.get(K_CLIENT,'');
-    if(!verifier || !cid) return;
-    try{
-      const r = await fetch('https://accounts.spotify.com/api/token', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-        body:new URLSearchParams({
-          client_id: cid,
-          grant_type: 'authorization_code',
-          code,
-          redirect_uri: redirectURI(),
-          code_verifier: verifier
-        })
+  function render(){
+    const id = store.get(K, '');
+    if(id){
+      body.innerHTML =
+        '<div class="spot-me"><div><div style="font-size:12px;font-weight:600">' + esc(id) + '</div>' +
+        '<div style="font-size:10px;color:rgba(255,255,255,.5)">Profil Spotify associé</div></div></div>' +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">' +
+        '<a class="spot-btn2" href="https://open.spotify.com/user/' + encodeURIComponent(id) + '" target="_blank" rel="noopener">Mon compte</a>' +
+        '<a class="spot-btn2 alt" href="https://open.spotify.com/" target="_blank" rel="noopener">Ouvrir Spotify</a>' +
+        '<button class="spot-btn2 alt" id="spotUnlink">Délier</button></div>' +
+        '<div class="spot-note">Lien vers ton profil Spotify. Aucun mot de passe n\'est demandé et rien n\'est envoyé à Spotify.</div>';
+      const off = $('#spotUnlink');
+      if(off) off.addEventListener('click', () => { store.del(K); render(); });
+    } else {
+      body.innerHTML =
+        '<div class="spot-note">Entre le lien de ton profil Spotify (ou ton pseudo) pour l\'associer à l\'app. Pas besoin de Spotify Developer, aucun mot de passe.</div>' +
+        '<input class="spot-input" id="spotProfileInput" placeholder="https://open.spotify.com/user/... ou @pseudo" autocomplete="off">' +
+        '<button class="spot-btn2" id="spotLink">Lier mon compte</button>' +
+        '<div class="spot-note" style="margin-top:8px">Un vrai login API Spotify nécessite une application Spotify Developer ; ici on lie simplement ton profil public.</div>';
+      const go = $('#spotLink');
+      if(go) go.addEventListener('click', () => {
+        const id = parseProfile($('#spotProfileInput') ? $('#spotProfileInput').value : '');
+        if(!id){ alert('Entre ton lien de profil ou ton pseudo Spotify.'); return; }
+        store.set(K, id);
+        render();
       });
-      const t = await r.json();
-      if(!r.ok) throw new Error(t.error_description || t.error || 'Connexion refusée');
-      store.set(K_TOK, t.access_token);
-      if(t.refresh_token) store.set(K_REF, t.refresh_token);
-      store.set('spotExp', Date.now() + (t.expires_in || 3600) * 1000);
-      sessionStorage.removeItem('spot_verifier');
-      history.replaceState({}, '', location.pathname + location.hash);
-      await loadMe();
-      const row = document.getElementById('spotRefreshRow');
-      if(row) row.hidden = false;
-    }catch(e){
-      sessionStorage.setItem('spot_error', e.message || 'Erreur Spotify');
-      history.replaceState({}, '', location.pathname + location.hash);
-    }
-  }
-
-  async function render(){
-    const user = store.get(K_USER, null);
-    const tok = store.get(K_TOK, '');
-    const err = sessionStorage.getItem('spot_error');
-    sessionStorage.removeItem('spot_error');
-    if(tok){
-      if(!user) await loadMe();
-      const me = store.get(K_USER, null);
-      const pls = await playlists();
-      body.innerHTML =
-        '<div class="spot-me">' + (me && me.images && me.images[0] ? '<img src="' + esc(me.images[0].url) + '" alt="">' : '') +
-        '<div><div style="font-size:12px;font-weight:600">' + esc((me && (me.display_name || me.id)) || 'Compte Spotify') + '</div>' +
-        '<div style="font-size:10px;color:rgba(255,255,255,.5)">Compte Spotify lié</div></div></div>' +
-        '<div style="display:flex;gap:6px;margin-bottom:6px"><a class="spot-btn2" href="https://open.spotify.com/" target="_blank" rel="noopener">Ouvrir Spotify</a>' +
-        '<button class="spot-btn2 alt" id="spotDisconnect">Déconnecter</button></div>' +
-        (pls.length ? '<div style="font-size:9.5px;color:rgba(255,255,255,.45);letter-spacing:1px;margin:8px 0 2px">PLAYLISTS</div>' +
-          pls.map(p => '<div class="spot-row"><span style="flex:1"><a href="' + esc((p.external_urls && p.external_urls.spotify) || 'https://open.spotify.com/') + '" target="_blank" rel="noopener">' + esc(p.name) + '</a></span><span style="font-size:9.5px;color:rgba(255,255,255,.4)">' + ((p.tracks && p.tracks.total) || '') + ' titres</span></div>').join('') : '') +
-        '<div class="spot-note">L\'écoute se fait dans Spotify ; le lecteur interne du pad reste disponible.</div>';
-      const off = $('#spotDisconnect');
-      if(off) off.addEventListener('click', () => { store.del(K_TOK); store.del(K_REF); store.del(K_USER); render(); });
-    }else{
-      const cid = store.get(K_CLIENT, '');
-      body.innerHTML =
-        '<div class="spot-note">Connecte ton compte Spotify pour retrouver tes playlists. Il faut une application Spotify Developer (gratuite) : crée-la, puis ajoute cette URL de redirection exacte :</div>' +
-        '<div class="spot-code">' + esc(redirectURI() || 'https://krosovo.github.io/openpad/pre-release/') + '</div>' +
-        '<div class="spot-note">Client ID de l\'application Spotify :</div>' +
-        '<input class="spot-input" id="spotClient" placeholder="ex. 1a2b3c4d5e6f7890..." value="' + esc(cid) + '">' +
-        '<button class="spot-btn2" id="spotConnect">Se connecter avec Spotify</button>' +
-        (err ? '<div class="spot-err" style="margin-top:8px">' + esc(err) + '</div>' : '') +
-        '<div class="spot-note" style="margin-top:8px">Le compte sert à afficher ton profil et tes playlists ; le lecteur interne reste indépendant.</div>';
-      const go = $('#spotConnect');
-      if(go) go.addEventListener('click', connect);
     }
   }
 
   $('#spotifyBtn')?.addEventListener('click', () => { panel.hidden = false; render(); });
   $('#spotifyClose')?.addEventListener('click', () => { panel.hidden = true; });
   panel.addEventListener('click', e => { if(e.target === panel) panel.hidden = true; });
-
-  handleCode().finally(() => {});
 })();
 
 /* ==================== À L'ÉCOUTE ==================== */
