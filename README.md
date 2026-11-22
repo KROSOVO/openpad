@@ -26,7 +26,7 @@ Sur iPhone / iPad, ouvrez l'application dans Safari puis **Partager** → **Sur 
 
 ## 🕹️ Dernière version web
 
-**Version actuelle :** V1.11.0
+**Version actuelle :** V1.11.1
 
 ➡️ [**Accéder à la dernière version d'OpenPad**](https://KROSOVO.github.io/openpad/Pre-Releases/V1.11.0.html)
 
