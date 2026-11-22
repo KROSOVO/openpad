@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="OpenPad by KROSOVO — le VESC Dashboard en mode CarPlay : compteur, carte GPS, applications et réglages dans une PWA plein écran.">
+<meta property="og:title" content="OpenPad by KROSOVO">
+<meta property="og:description" content="Le VESC Dashboard en mode CarPlay — compteur, GPS, applications et réglages.">
+<meta property="og:url" content="https://krosovo.github.io/openpad/">
+<meta name="theme-color" content="#060a13">
+<title>OpenPad by KROSOVO — le VESC Dashboard en mode CarPlay</title>
+<link rel="icon" type="image/png" href="app/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#060a13;--panel:#0d131d;--panel2:#131b28;--line:#1f2937;
+  --text:#e9eef7;--muted:#7f8da3;--accent:#2f7bff;--ok:#5dd67f;
+  --glow:color-mix(in srgb,var(--accent) 55%,transparent);
+  --glow2:color-mix(in srgb,var(--accent) 14%,transparent);
+  --font:"Sora","Segoe UI",Arial,sans-serif;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif;
+  color-scheme:dark;
+}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);scroll-behavior:smooth}
+body{
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% -5%,var(--glow2),transparent 70%),
+    radial-gradient(ellipse 40% 30% at 85% 15%,rgba(93,214,127,.06),transparent 70%),
+    repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 1px,transparent 1px 14px);
+  min-height:100vh;
+}
+a{color:var(--accent);text-decoration:none}
+::selection{background:var(--accent);color:#fff}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:50;background:#060a13d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--cond);font-weight:700;font-size:19px;letter-spacing:1.5px;color:var(--text)}
+.logo .bolt{width:26px;height:26px;flex:0 0 auto}
+.logo .bolt path{fill:var(--accent)}
+.logo small{color:var(--muted);font-size:11px;letter-spacing:2px;font-weight:500}
+nav .links{display:flex;gap:4px;margin-left:auto}
+nav .links a{color:var(--muted);font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:9px;letter-spacing:.4px}
+nav .links a:hover{color:var(--text);background:var(--panel2)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-left:6px}
+.lang button{background:none;border:0;color:var(--muted);font:600 12px var(--font);padding:6px 12px;cursor:pointer;letter-spacing:.5px}
+.lang button.on{background:var(--accent);color:#fff}
+nav .links{margin-left:auto}
+
+/* ---------- hero ---------- */
+header{padding:88px 0 70px;text-align:center;position:relative;overflow:hidden}
+header::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 45% 55% at 50% 0%,var(--glow2),transparent 70%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#0d131dcc;border-radius:999px;padding:7px 16px;font-size:12.5px;color:var(--muted);letter-spacing:1.2px;font-weight:600}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulse 2.2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+h1{margin:22px 0 10px;font-family:var(--cond);font-weight:700;font-size:clamp(52px,9vw,96px);line-height:.95;letter-spacing:1px;
+   background:linear-gradient(180deg,var(--text),color-mix(in srgb,var(--text) 62%,transparent));
+   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1 .ac{-webkit-text-fill-color:var(--accent);background:none}
+.tagline{max-width:620px;margin:14px auto 0;color:var(--muted);font-size:16.5px;line-height:1.65;font-weight:300}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:9px;border:0;border-radius:12px;padding:13px 24px;font:600 14.5px var(--font);cursor:pointer;letter-spacing:.3px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.p{background:var(--accent);color:#fff;box-shadow:0 6px 24px -6px var(--glow)}
+.btn.p:hover{box-shadow:0 10px 30px -6px var(--glow)}
+.btn.g{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.btn.g:hover{border-color:#33415a}
+.btn.o{background:none;color:var(--muted);border:1px solid var(--line)}
+.btn.o:hover{color:var(--text);border-color:#33415a}
+.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.stat{border:1px solid var(--line);background:#0d131daa;border-radius:14px;padding:12px 22px;min-width:120px}
+.stat b{display:block;font-family:var(--cond);font-size:26px;font-weight:700;color:var(--accent);letter-spacing:.5px}
+.stat span{font-size:11.5px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+
+/* ---------- sections ---------- */
+section{padding:64px 0}
+section h2{font-family:var(--cond);font-weight:700;font-size:clamp(30px,4.5vw,42px);letter-spacing:1px;margin:0 0 8px}
+.kicker{color:var(--accent);font:600 12px var(--font);letter-spacing:2.5px;text-transform:uppercase}
+.lead{color:var(--muted);max-width:640px;line-height:1.7;font-size:15.5px;font-weight:300}
+
+/* project */
+.proj{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:start;margin-top:26px}
+.proj .txt p{color:var(--muted);line-height:1.75;font-size:15.5px;font-weight:300;margin:0 0 16px}
+.proj .txt p b{color:var(--text);font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.card h3{margin:0 0 14px;font-size:15px;letter-spacing:1px;color:var(--text)}
+.card ul{margin:0;padding:0;list-style:none}
+.card li{display:flex;gap:10px;align-items:baseline;padding:7px 0;color:var(--muted);font-size:14px;line-height:1.5;border-bottom:1px dashed #1a2334}
+.card li:last-child{border:0}
+.card li::before{content:"⚡";font-size:11px;color:var(--accent);flex:0 0 auto;transform:translateY(-1px)}
+
+/* features */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:30px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.f::after{content:"";position:absolute;inset:0;background:radial-gradient(circle 120px at 85% -10%,var(--glow2),transparent);opacity:0;transition:opacity .25s}
+.f:hover{border-color:#33415a;transform:translateY(-3px);box-shadow:0 14px 34px -18px #000}
+.f:hover::after{opacity:1}
+.f .ic{width:42px;height:42px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.f .ic svg{width:21px;height:21px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.f h3{margin:0 0 8px;font-size:16px;font-weight:600}
+.f p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.65;font-weight:300}
+
+/* versions */
+.latest{margin-top:28px;border-radius:20px;padding:1.5px;background:linear-gradient(120deg,var(--accent),transparent 55%,var(--ok))}
+.latest .in{background:var(--panel);border-radius:19px;padding:24px 26px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.latest .tag{font:700 11px var(--font);letter-spacing:2px;color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 45%,transparent);border-radius:999px;padding:5px 13px}
+.latest .v{font-family:var(--cond);font-weight:700;font-size:44px;color:var(--text);line-height:1}
+.latest .d{color:var(--muted);font-size:13.5px;flex:1;min-width:200px;line-height:1.6}
+.latest .go{margin-left:auto}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-top:22px}
+.chip{position:relative;display:flex;justify-content:center;align-items:center;height:42px;border:1px solid var(--line);border-radius:10px;background:#0d131d99;
+      font-family:var(--cond);font-weight:600;font-size:16px;letter-spacing:.5px;color:var(--muted);transition:all .15s}
+.chip:hover{color:#fff;border-color:var(--accent);background:var(--panel2);transform:translateY(-2px);box-shadow:0 6px 16px -8px var(--glow)}
+.chip.hot{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 55%,transparent)}
+.chip small{position:absolute;top:-8px;right:6px;background:var(--accent);color:#fff;font:700 8px var(--font);letter-spacing:1px;border-radius:999px;padding:2px 6px}
+.vnote{color:var(--muted);font-size:12.5px;margin-top:16px}
+
+/* support */
+.support .card{margin-top:28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;padding:26px 28px}
+.support .card .tx{flex:1;min-width:240px}
+.support h3{margin:0 0 8px;font-size:18px}
+.support p{margin:0;color:var(--muted);font-size:14px;line-height:1.65;font-weight:300}
+.dc{display:inline-flex;align-items:center;gap:10px}
+.dc svg{width:20px;height:20px;fill:#fff}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:34px 0 44px;color:var(--muted);font-size:12.5px}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+footer a:hover{color:var(--text)}
+
+/* modal */
+.ovl{position:fixed;inset:0;background:#030610cc;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:100;display:none;align-items:center;justify-content:center;padding:22px}
+.ovl.on{display:flex}
+.modal{background:var(--panel);border:1px solid #33415a;border-radius:20px;max-width:440px;width:100%;padding:30px 30px 26px;box-shadow:0 30px 80px -20px #000;position:relative}
+.modal h3{margin:0 0 10px;font-size:19px}
+.modal p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.7;font-weight:300}
+.pseudo{display:flex;gap:8px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:14px}
+.pseudo b{font-family:var(--cond);font-size:19px;letter-spacing:1.5px;color:var(--text)}
+.pseudo button{margin-left:auto;background:var(--accent);color:#fff;border:0;border-radius:8px;font:600 12px var(--font);padding:8px 14px;cursor:pointer}
+.pseudo button:hover{filter:brightness(1.12)}
+.modal .note{font-size:12px;color:var(--muted);line-height:1.6}
+.modal .x{position:absolute;top:14px;right:14px;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.modal .x:hover{color:var(--text)}
+
+/* ---------- sélecteur de plateforme ---------- */
+.pmodal{background:var(--panel);border:1px solid #33415a;border-radius:22px;max-width:720px;width:100%;padding:28px 28px 26px;box-shadow:0 30px 90px -20px #000;position:relative;
+        opacity:0;transform:scale(.9) translateY(18px);transition:opacity .3s,transform .45s cubic-bezier(.18,.9,.27,1.18)}
+.povl.on .pmodal{opacity:1;transform:none}
+.pmodal h3{margin:0 0 6px;font-size:21px;text-align:center}
+.pmodal .psub{margin:0 0 22px;color:var(--muted);font-size:13.5px;text-align:center;font-weight:300}
+.pmodal .x{position:absolute;top:14px;right:14px;background:none;border:0;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.pmodal .x:hover{color:var(--text)}
+.pcols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pcard{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;overflow:hidden;
+       opacity:0;transform:translateY(22px)}
+.povl.on .pcard{animation:prise .55s cubic-bezier(.2,.85,.3,1.15) forwards}
+.povl.on .pcard.ios{animation-delay:.14s}
+@keyframes prise{to{opacity:1;transform:none}}
+.pcard::before{content:"";position:absolute;inset:0;background:radial-gradient(circle 130px at 80% -12%,var(--pc),transparent 75%);opacity:.14;pointer-events:none}
+.pcard.android{--pc:#3ddc84}
+.pcard.ios{--pc:#c9d4e8}
+.pcard:hover{border-color:color-mix(in srgb,var(--pc) 55%,transparent);box-shadow:0 16px 40px -20px var(--pc);transform:translateY(-3px);transition:all .25s}
+.pic{width:46px;height:46px;border-radius:14px;background:color-mix(in srgb,var(--pc) 16%,transparent);border:1px solid color-mix(in srgb,var(--pc) 38%,transparent);
+     display:flex;align-items:center;justify-content:center;margin-bottom:12px;animation:flotte 3.2s ease-in-out infinite}
+.pic svg{width:24px;height:24px;fill:var(--pc)}
+.pcard.android .pic{box-shadow:0 0 18px -4px #3ddc8466}
+.pcard.ios .pic{box-shadow:0 0 18px -4px #c9d4e855}
+@keyframes flotte{50%{transform:translateY(-4px)}}
+.pcard h4{margin:0 0 4px;font-size:17px;display:flex;align-items:center;gap:8px}
+.pcard h4 small{font:600 9.5px var(--font);letter-spacing:1.5px;color:var(--pc);border:1px solid color-mix(in srgb,var(--pc) 45%,transparent);border-radius:999px;padding:3px 9px}
+.pcard ol{margin:12px 0 16px;padding:0;list-style:none;counter-reset:et}
+.pcard ol li{counter-increment:et;display:flex;gap:11px;align-items:baseline;color:var(--muted);font-size:13px;line-height:1.6;padding:7px 0;border-top:1px dashed #232e42;
+             opacity:0;transform:translateX(-10px)}
+.povl.on .pcard ol li{animation:etape .45s forwards;animation-delay:calc(.3s + var(--i)*.12s)}
+@keyframes etape{to{opacity:1;transform:none}}
+.pcard ol li::before{content:counter(et);flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:color-mix(in srgb,var(--pc) 18%,transparent);
+     border:1px solid color-mix(in srgb,var(--pc) 45%,transparent);color:var(--pc);font:700 11px var(--font);display:flex;align-items:center;justify-content:center;transform:translateY(3px)}
+.pcard ol li b{color:var(--text);font-weight:600}
+.pgo{display:flex;justify-content:center}
+.pgo .btn{width:100%;justify-content:center}
+.pcard .mini{display:block;text-align:center;margin-top:10px;font-size:11.5px;color:var(--muted)}
+.pcard .mini a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.pcard .mini a:hover{color:var(--text)}
+@keyframes flotte2{50%{transform:translateY(-4px)}}
+
+@media(max-width:820px){
+  .proj{grid-template-columns:1fr}
+  nav .links a{display:none}
+  header{padding:64px 0 54px}
+}
+@media(max-width:560px){
+  .stats{gap:8px}.stat{min-width:100px;padding:10px 14px}
+  .latest .in{gap:14px}.latest .v{font-size:36px}.latest .go{margin-left:0;width:100%}
+  .btn{padding:12px 18px;font-size:13.5px}
+  .pcols{grid-template-columns:1fr}
+  .pmodal{padding:22px 18px 20px}
+}
+</style>
+</head>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <svg class="bolt" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><rect x="3.5" y="3.5" width="7.4" height="7.4" rx="2"/><rect x="13.1" y="3.5" width="7.4" height="7.4" rx="2"/><rect x="3.5" y="13.1" width="7.4" height="7.4" rx="2"/><rect x="13.1" y="13.1" width="7.4" height="7.4" rx="2"/></g></svg>
+      OPENPAD <small>by KROSOVO</small>
+    </a>
+    <div class="links">
+      <a href="#projet" data-fr="Le projet" data-en="The project">Le projet</a>
+      <a href="#fonctionnalites" data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</a>
+      <a href="#versions" data-fr="Versions" data-en="Versions">Versions</a>
+      <a href="#support" data-fr="Support" data-en="Support">Support</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button id="langFr" class="on" onclick="setLang('fr')">FR</button>
+        <button id="langEn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span><span data-fr="Le VESC Dashboard, en mode CarPlay" data-en="The VESC Dashboard, CarPlay style">Le VESC Dashboard, en mode CarPlay</span></span>
+    <h1>OPEN <span class="ac">PAD</span></h1>
+    <p class="tagline" data-fr="Le même tableau de bord VESC que VESC Dashboard, mais dans une interface type iPad / CarPlay : compteur, carte GPS, applications et réglages, réunis dans une PWA plein écran."
+       data-en="The same VESC dashboard as VESC Dashboard, but inside an iPad / CarPlay style interface: gauge, GPS map, apps and settings in a full-screen PWA.">
+      Le même tableau de bord VESC que VESC Dashboard, mais dans une interface type iPad / CarPlay : compteur, carte GPS, applications et réglages, réunis dans une PWA plein écran.</p>
+    <div class="cta">
+      <button class="btn p" onclick="openPlatform()">⚡ <span data-fr="Ouvrir l'application" data-en="Open the app">Ouvrir l'application</span></button>
+      <a class="btn g" href="Pre-Releases/V1.11.0.html"><span data-fr="Dernière version — V1.11.0" data-en="Latest version — V1.11.0">Dernière version — V1.11.0</span></a>
+      <button class="btn o" onclick="openModal()"><span data-fr="Signaler un problème" data-en="Report an issue">Signaler un problème</span></button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>20</b><span data-fr="versions publiées" data-en="published versions">versions publiées</span></div>
+      <div class="stat"><b>10</b><span data-fr="applications" data-en="apps">applications</span></div>
+      <div class="stat"><b>PWA</b><span data-fr="hors ligne" data-en="works offline">hors ligne</span></div>
+      <div class="stat"><b>VESC</b><span data-fr="compteurs d'origine" data-en="original gauges">compteurs d'origine</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="projet">
+  <div class="wrap">
+    <div class="kicker" data-fr="Le projet" data-en="The project">Le projet</div>
+    <h2>Le tableau de bord, <span style="color:var(--accent)">en mode CarPlay</span></h2>
+    <div class="proj">
+      <div class="txt">
+        <p data-fr="<b>OpenPad</b> reprend le tableau de bord de <b>VESC Dashboard</b> — les compteurs, la carte GPS et les modes — et l'installe dans un écran d'accueil type iPad / CarPlay, avec un dock, des applis et un vrai mode sombre."
+           data-en="<b>OpenPad</b> takes the <b>VESC Dashboard</b> core — gauges, GPS map and riding modes — and puts it inside an iPad / CarPlay style home screen, with a dock, apps and a real dark mode.">
+          <b>OpenPad</b> reprend le tableau de bord de <b>VESC Dashboard</b> — les compteurs, la carte GPS et les modes — et l'installe dans un écran d'accueil type iPad / CarPlay, avec un dock, des applis et un vrai mode sombre.</p>
+        <p data-fr="Les compteurs VESC sont ceux du Dashboard : mêmes jauges, mêmes styles, même source. OpenPad ajoute l'interface autour : écran d'accueil, dock, applications (Messages, Musique, Calendrier, Météo, Téléphone…), mode sombre et installation PWA."
+           data-en="The VESC gauges are the Dashboard's: same dials, same styles, same source. OpenPad adds the interface around them: home screen, dock, apps (Messages, Music, Calendar, Weather, Phone…), dark mode and PWA install.">
+          Les compteurs VESC sont ceux du Dashboard : mêmes jauges, mêmes styles, même source. OpenPad ajoute l'interface autour : écran d'accueil, dock, applications (Messages, Musique, Calendrier, Météo, Téléphone…), mode sombre et installation PWA.</p>
+        <p data-fr="Comme le Dashboard, OpenPad est une page HTML/CSS/JS unique, gratuite et installable. Sur Android, installez la PWA depuis Chrome ; sur iPad/iPhone, ajoutez-la à l'écran d'accueil depuis Safari (ou utilisez <b>Bluefy</b> pour le Bluetooth)."
+           data-en="Like the Dashboard, OpenPad is a single HTML/CSS/JS page, free and installable. On Android install the PWA from Chrome; on iPad/iPhone add it to the home screen from Safari (or use <b>Bluefy</b> for Bluetooth).">
+          Comme le Dashboard, OpenPad est une page HTML/CSS/JS unique, gratuite et installable. Sur Android, installez la PWA depuis Chrome ; sur iPad/iPhone, ajoutez-la à l'écran d'accueil depuis Safari (ou utilisez <b>Bluefy</b> pour le Bluetooth).</p>
+      </div>
+      <div class="card">
+        <h3 data-fr="EN RÉSUMÉ" data-en="IN SHORT">EN RÉSUMÉ</h3>
+        <ul>
+          <li data-fr="Compteurs VESC identiques à VESC Dashboard" data-en="VESC gauges identical to VESC Dashboard">Compteurs VESC identiques à VESC Dashboard</li>
+          <li data-fr="Interface iPad / CarPlay : accueil, dock, applis" data-en="iPad / CarPlay interface: home, dock, apps">Interface iPad / CarPlay : accueil, dock, applis</li>
+          <li data-fr="7 styles de compteur : Classique, VARG, Halo, Flux, Race, Moto, Analog" data-en="7 gauge styles: Classic, VARG, Halo, Flux, Race, Moto, Analog">7 styles de compteur : Classique, VARG, Halo, Flux, Race, Moto, Analog</li>
+          <li data-fr="Cartographie OpenStreetMap et recentrage GPS" data-en="OpenStreetMap mapping and GPS recenter">Cartographie OpenStreetMap et recentrage GPS</li>
+          <li data-fr="Mode sombre sur toutes les applications" data-en="Dark mode across every app">Mode sombre sur toutes les applications</li>
+          <li data-fr="Gratuit et open source — HTML/CSS/JS uniquement" data-en="Free and open source — HTML/CSS/JS only">Gratuit et open source — HTML/CSS/JS uniquement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fonctionnalites" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker" data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</div>
+    <h2>Tout le Dashboard, plus l'interface</h2>
+    <div class="grid">
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/><circle cx="12" cy="18" r="1.4"/></svg></div>
+        <h3 data-fr="Compteur VESC" data-en="VESC gauge">Compteur VESC</h3>
+        <p data-fr="Les compteurs du Dashboard : vitesse, batterie, tension, puissance, accélération et modes — mêmes rendus, mêmes styles." data-en="The Dashboard gauges: speed, battery, voltage, power, throttle and modes — same look, same styles.">Les compteurs du Dashboard : vitesse, batterie, tension, puissance, accélération et modes — mêmes rendus, mêmes styles.</p></div>
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+        <h3 data-fr="Carte & GPS" data-en="Map & GPS">Carte &amp; GPS</h3>
+        <p data-fr="Carte OpenStreetMap, position en temps réel, recherche de destination, itinéraire et bouton de recentrage." data-en="OpenStreetMap, live position, destination search, routing and a recenter button.">Carte OpenStreetMap, position en temps réel, recherche de destination, itinéraire et bouton de recentrage.</p></div>
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3 data-fr="Interface iPad / CarPlay" data-en="iPad / CarPlay UI">Interface iPad / CarPlay</h3>
+        <p data-fr="Écran d'accueil, dock, applis et transitions : le Dashboard devient un vrai pad, pas juste une page de compteur." data-en="Home screen, dock, apps and transitions: the Dashboard becomes a real pad, not just a gauge page.">Écran d'accueil, dock, applis et transitions : le Dashboard devient un vrai pad, pas juste une page de compteur.</p></div>
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg></div>
+        <h3 data-fr="Mode sombre" data-en="Dark mode">Mode sombre</h3>
+        <p data-fr="Messages, Calendrier, Musique et le reste passent en sombre quand le thème sombre est actif." data-en="Messages, Calendar, Music and the rest switch to dark when dark mode is on.">Messages, Calendrier, Musique et le reste passent en sombre quand le thème sombre est actif.</p></div>
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 12.5A10 10 0 0 1 19 12.5"/><path d="M8.5 15.5a6 6 0 0 1 7 0"/><circle cx="12" cy="18.5" r="1.2"/></svg></div>
+        <h3 data-fr="Installation hors ligne" data-en="Offline install">Installation hors ligne</h3>
+        <p data-fr="PWA installable : l'app se lance depuis l'écran d'accueil et garde ses fonctions essentielles sans réseau." data-en="Installable PWA: launch it from your home screen; core features keep working without a network.">PWA installable : l'app se lance depuis l'écran d'accueil et garde ses fonctions essentielles sans réseau.</p></div>
+      <div class="f"><div class="ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <h3 data-fr="Android, iPad &amp; iPhone" data-en="Android, iPad &amp; iPhone">Android, iPad &amp; iPhone</h3>
+        <p data-fr="PWA sur Android (Chrome) et sur iPad/iPhone (Safari). Bluefy apporte le Bluetooth web si besoin." data-en="PWA on Android (Chrome) and iPad/iPhone (Safari). Bluefy brings Web Bluetooth when needed.">PWA sur Android (Chrome) et sur iPad/iPhone (Safari). Bluefy apporte le Bluetooth web si besoin.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="versions">
+  <div class="wrap">
+    <div class="kicker" data-fr="Versions" data-en="Versions">Versions</div>
+    <h2 data-fr="Toutes les versions" data-en="All versions">Toutes les versions</h2>
+    <p class="lead" data-fr="L'historique complet du projet, de la première version à aujourd'hui. Chaque version reste accessible." data-en="The project's full history, from the first release to today. Every version stays accessible.">L'historique complet du projet, de la première version à aujourd'hui. Chaque version reste accessible.</p>
+    <div class="latest">
+      <div class="in">
+        <span class="tag" data-fr="DERNIÈRE" data-en="LATEST">DERNIÈRE</span>
+        <span class="v">V1.11.0</span>
+        <span class="d" data-fr="Retour de l'app Musique classique (sans Spotify), applications en mode sombre, recentrage sur la carte et compteur Classique resserré au centre." data-en="Classic Music app restored (no Spotify), dark apps, map recenter and a tighter Classic gauge in the middle.">Retour de l'app Musique classique (sans Spotify), applications en mode sombre, recentrage sur la carte et compteur Classique resserré au centre.</span>
+        <a class="btn p go" href="Pre-Releases/V1.11.0.html"><span data-fr="Ouvrir" data-en="Open">Ouvrir</span> →</a>
+      </div>
+    </div>
+    <div class="chips">
+      <a class="chip" href="Pre-Releases/V1.1.0.html" title="V1.1.0">V1.1.0</a>
+      <a class="chip" href="Pre-Releases/V1.2.0.html" title="V1.2.0">V1.2.0</a>
+      <a class="chip" href="Pre-Releases/V1.3.0.html" title="V1.3.0">V1.3.0</a>
+      <a class="chip" href="Pre-Releases/V1.4.0.html" title="V1.4.0">V1.4.0</a>
+      <a class="chip" href="Pre-Releases/V1.5.0.html" title="V1.5.0">V1.5.0</a>
+      <a class="chip" href="Pre-Releases/V1.5.1.html" title="V1.5.1">V1.5.1</a>
+      <a class="chip" href="Pre-Releases/V1.5.2.html" title="V1.5.2">V1.5.2</a>
+      <a class="chip" href="Pre-Releases/V1.6.0.html" title="V1.6.0">V1.6.0</a>
+      <a class="chip" href="Pre-Releases/V1.7.0.html" title="V1.7.0">V1.7.0</a>
+      <a class="chip" href="Pre-Releases/V1.7.1.html" title="V1.7.1">V1.7.1</a>
+      <a class="chip" href="Pre-Releases/V1.7.2.html" title="V1.7.2">V1.7.2</a>
+      <a class="chip" href="Pre-Releases/V1.7.3.html" title="V1.7.3">V1.7.3</a>
+      <a class="chip" href="Pre-Releases/V1.7.4.html" title="V1.7.4">V1.7.4</a>
+      <a class="chip" href="Pre-Releases/V1.8.0.html" title="V1.8.0">V1.8.0</a>
+      <a class="chip" href="Pre-Releases/V1.9.0.html" title="V1.9.0">V1.9.0</a>
+      <a class="chip" href="Pre-Releases/V1.10.0.html" title="V1.10.0">V1.10.0</a>
+      <a class="chip" href="Pre-Releases/V1.10.1.html" title="V1.10.1">V1.10.1</a>
+      <a class="chip" href="Pre-Releases/V1.10.2.html" title="V1.10.2">V1.10.2</a>
+      <a class="chip" href="Pre-Releases/V1.10.3.html" title="V1.10.3">V1.10.3</a>
+      <a class="chip hot" href="Pre-Releases/V1.11.0.html" title="V1.11.0"><small>DERNIÈRE</small>V1.11.0</a>
+    </div>
+    <p class="vnote" data-fr="Astuce : ajoutez la page à votre écran d'accueil pour toujours ouvrir la dernière version installée." data-en="Tip: add the app to your home screen to always open the latest installed version.">Astuce : ajoutez la page à votre écran d'accueil pour toujours ouvrir la dernière version installée.</p>
+  </div>
+</section>
+
+<section id="support" class="support" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker" data-fr="Support" data-en="Support">Support</div>
+    <h2 data-fr="Un problème ? Une idée ?" data-en="An issue? An idea?">Un problème ? Une idée ?</h2>
+    <p class="lead" data-fr="Ce projet évolue grâce à vos retours : bug, suggestion, demande de fonctionnalité — écrivez-moi directement sur Discord." data-en="This project evolves thanks to your feedback: bugs, suggestions, feature requests — message me directly on Discord.">Ce projet évolue grâce à vos retours : bug, suggestion, demande de fonctionnalité — écrivez-moi directement sur Discord.</p>
+    <div class="card">
+      <div class="tx">
+        <h3 data-fr="Signaler un problème" data-en="Report an issue">Signaler un problème</h3>
+        <p data-fr="Cliquez ci-dessous : rejoignez le serveur Discord du projet et décrivez votre souci (version, appareil, étapes pour reproduire)." data-en="Click below: join the project's Discord server and describe your issue (version, device, steps to reproduce).">Cliquez ci-dessous : rejoignez le serveur Discord du projet et décrivez votre souci (version, appareil, étapes pour reproduire).</p>
+      </div>
+      <button class="btn p dc" onclick="openModal()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.78 13.78 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 12.64 12.64 0 0 0-.64-1.28h-.05A19.74 19.74 0 0 0 3.64 4.4 20.34 20.34 0 0 0 .1 18.06a19.9 19.9 0 0 0 6.07 3.03 14.55 14.55 0 0 0 1.3-2.1 12.9 12.9 0 0 1-2.05-.98c.17-.12.34-.25.5-.38a14.2 14.2 0 0 0 12.16 0c.17.13.33.26.5.38a12.94 12.94 0 0 1-2.05.98 14.4 14.4 0 0 0 1.3 2.1 19.84 19.84 0 0 0 6.07-3.03 20.29 20.29 0 0 0-3.58-13.69ZM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42s.95-2.43 2.16-2.43 2.18 1.09 2.16 2.43c0 1.34-.95 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.16-1.08-2.16-2.42s.95-2.43 2.16-2.43 2.18 1.09 2.16 2.43c0 1.33-.96 2.42-2.16 2.42Z"/></svg>
+        <span data-fr="Me contacter sur Discord" data-en="Contact me on Discord">Me contacter sur Discord</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span data-fr="OpenPad — projet personnel de KROSOVO, non affilié à VESC ou Stark Future." data-en="OpenPad — a personal project by KROSOVO, not affiliated with VESC or Stark Future.">OpenPad — projet personnel de KROSOVO, non affilié à VESC ou Stark Future.</span>
+    <span><a href="https://github.com/KROSOVO/openpad">GitHub</a> · <a href="app/" data-fr="Application" data-en="App">Application</a> · <a href="conditions.html" data-fr="Conditions d'utilisation" data-en="Terms of use">Conditions d'utilisation</a></span>
+  </div>
+</footer>
+
+<div class="ovl" id="ovl" role="dialog" aria-modal="true" aria-labelledby="mTitle" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="x" onclick="closeModal()" aria-label="Fermer">×</button>
+    <h3 id="mTitle" data-fr="Contact Discord" data-en="Discord contact">Contact Discord</h3>
+    <p data-fr="Pour signaler un problème ou proposer une amélioration, rejoignez le serveur du projet ou contactez-moi directement sur Discord :" data-en="To report an issue or suggest an improvement, join the project's server or reach out to me directly on Discord:">Pour signaler un problème ou proposer une amélioration, rejoignez le serveur du projet ou contactez-moi directement sur Discord :</p>
+    <div class="pseudo"><b id="dcName">KROSOVO</b><button id="copyBtn" onclick="copyDc()" data-fr="Copier" data-en="Copy">Copier</button></div>
+    <a class="btn p" style="display:flex;justify-content:center;margin-bottom:16px" href="https://discord.gg/fyZXHnyAHT" target="_blank" rel="noopener"><span data-fr="Rejoindre le serveur Discord ↗" data-en="Join the Discord server ↗">Rejoindre le serveur Discord ↗</span></a>
+    <p class="note" data-fr="Décrivez votre problème avec le plus de détails possible : version utilisée, appareil, ce que vous faisiez et ce qui s'est passé." data-en="Describe your issue in as much detail as possible: version used, device, what you were doing and what happened.">Décrivez votre problème avec le plus de détails possible : version utilisée, appareil, ce que vous faisiez et ce qui s'est passé.</p>
+  </div>
+</div>
+
+<div class="ovl povl" id="povl" role="dialog" aria-modal="true" aria-labelledby="pTitle" onclick="if(event.target===this)closePlatform()">
+  <div class="pmodal">
+    <button class="x" onclick="closePlatform()" aria-label="Fermer">×</button>
+    <h3 id="pTitle" data-fr="Choisissez votre plateforme" data-en="Choose your platform">Choisissez votre plateforme</h3>
+    <p class="psub" data-fr="Deux façons d'installer OpenPad — suivez les étapes de votre appareil." data-en="Two ways to install OpenPad — follow the steps for your device.">Deux façons d'installer OpenPad — suivez les étapes de votre appareil.</p>
+    <div class="pcols">
+      <div class="pcard android">
+        <div class="pic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18c.09-.16.04-.37-.12-.45-.16-.09-.37-.04-.45.12l-1.87 3.23c-1.44-.66-3.06-1.03-4.8-1.03-1.74 0-3.36.37-4.8 1.03L5.53 5.97c-.09-.16-.29-.21-.45-.12-.16.09-.21.29-.12.45L7.1 9.48C4.15 11.03 2.14 13.79 2 17h20c-.14-3.21-2.15-5.97-5.1-7.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg></div>
+        <h4>Android <small data-fr="APPLICATION" data-en="APP">APPLICATION</small></h4>
+        <ol>
+          <li style="--i:0"><span data-fr="Ouvrez l'app dans <b>Chrome</b>" data-en="Open the app in <b>Chrome</b>">Ouvrez l'app dans <b>Chrome</b></span></li>
+          <li style="--i:1"><span data-fr="Touchez ⋮ puis « <b>Installer l'application</b> »" data-en="Tap ⋮ then “<b>Install app</b>”">Touchez ⋮ puis « <b>Installer l'application</b> »</span></li>
+          <li style="--i:2"><span data-fr="Confirmez <b>Installer</b> : l'app arrive sur votre écran d'accueil et fonctionne même hors ligne" data-en="Confirm <b>Install</b>: the app lands on your home screen and works offline too">Confirmez <b>Installer</b> : l'app arrive sur votre écran d'accueil et fonctionne même hors ligne</span></li>
+        </ol>
+        <div class="pgo"><a class="btn p" href="app/"><span data-fr="Installer sur Android →" data-en="Install on Android →">Installer sur Android →</span></a></div>
+      </div>
+      <div class="pcard ios">
+        <div class="pic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.46 2.2-1.21 3.02-.8.9-2.1 1.6-3.18 1.51-.14-1.1.42-2.28 1.15-3.06.81-.88 2.22-1.53 3.24-1.47zM20.5 17.24c-.57 1.3-.85 1.88-1.59 3.03-1.03 1.61-2.49 3.62-4.29 3.63-1.6.02-2.01-1.05-4.19-1.04-2.17.01-2.63 1.07-4.23 1.05-1.8-.02-3.18-1.82-4.21-3.43C.35 16.9-.02 12.4 1.5 9.93c1.06-1.73 2.75-2.74 4.34-2.74 1.62 0 2.63 1.06 3.97 1.06 1.3 0 2.09-1.06 3.96-1.06 1.42 0 2.92.77 3.99 2.11-3.5 1.92-2.94 6.92.74 8.94z"/></svg></div>
+        <h4>iPad / iPhone <small data-fr="SAFARI" data-en="SAFARI">SAFARI</small></h4>
+        <ol>
+          <li style="--i:0"><span data-fr="Ouvrez l'app dans <b>Safari</b>" data-en="Open the app in <b>Safari</b>">Ouvrez l'app dans <b>Safari</b></span></li>
+          <li style="--i:1"><span data-fr="Touchez <b>Partager</b> puis « <b>Sur l'écran d'accueil</b> »" data-en="Tap <b>Share</b> then “<b>Add to Home Screen</b>”">Touchez <b>Partager</b> puis « <b>Sur l'écran d'accueil</b> »</span></li>
+          <li style="--i:2"><span data-fr="Lancez OpenPad en plein écran depuis l'icône, comme une vraie app" data-en="Launch OpenPad full screen from its icon, like a real app">Lancez OpenPad en plein écran depuis l'icône, comme une vraie app</span></li>
+        </ol>
+        <div class="pgo"><a class="btn p" href="app/"><span data-fr="Ouvrir sur iPad →" data-en="Open on iPad →">Ouvrir sur iPad →</span></a></div>
+        <span class="mini"><a href="https://apps.apple.com/app/bluefy-web-ble-browser/id1492822055" target="_blank" rel="noopener" data-fr="Bluetooth sur iOS : Bluefy ↗" data-en="Bluetooth on iOS: Bluefy ↗">Bluetooth sur iOS : Bluefy ↗</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- langues ---------- */
+let lang="fr";
+try{lang=localStorage.getItem("opLang")||"fr"}catch(e){}
+const $=s=>document.querySelector(s);
+function setLang(l){
+  lang=l;try{localStorage.setItem("opLang",l)}catch(e){}
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-fr]").forEach(el=>{el.innerHTML=el.dataset[l]});
+  $("#langFr").classList.toggle("on",l==="fr");$("#langEn").classList.toggle("on",l==="en");
+}
+/* ---------- modals ---------- */
+function openModal(){$("#ovl").classList.add("on")}
+function closeModal(){$("#ovl").classList.remove("on")}
+function openPlatform(){$("#povl").classList.add("on")}
+function closePlatform(){$("#povl").classList.remove("on")}
+function copyDc(){
+  const done=()=>{const b=$("#copyBtn"),f=b.dataset[lang];b.textContent=lang==="fr"?"Copié !":"Copied!";setTimeout(()=>b.textContent=f,1600)};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText("KROSOVO").then(done).catch(done);
+  else done();
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closePlatform()}});
+setLang(lang);
+</script>
+</body>
+</html>

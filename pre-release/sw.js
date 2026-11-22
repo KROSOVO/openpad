@@ -1,4 +1,4 @@
-const CACHE = 'openpad-v1.10.3';
+const CACHE = 'openpad-v1.11.0';
 const CORE = [
   './',
   './index.html',
